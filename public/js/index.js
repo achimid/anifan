@@ -3,6 +3,7 @@ const $list = document.querySelector("#accordion")
 load()
 
 function load() {
+
     if (ethereum) {
         fetch("/api/v1/home/wallet")
         // ethereum.request({ method: 'eth_requestAccounts' })
