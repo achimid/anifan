@@ -1,18 +1,19 @@
-const json = [{"id": "654","title": "Overlord IV - 4ª temporada - Episódio 04","mirrors": [{"description": "Online","url": "https://animesonline.cc/episodio/overlord-4-episodio-4/"},{"description": "Torrent","url": "#"},{"description": "1080p","url": "https://drive.google.com/file/d/1_jn3e3X60c1uJObOPubI9UIJUdIqZvO1/view"},{"description": "720p","url": "https://drive.google.com/file/d/1xSnnZmGG1cEhvhhP37FMjdP7u42zB6Sr/view"},{"description": "MP4","url": "https://drive.google.com/file/d/1O_jR5RD_vSjC8kBJK-Sydpu4gqvYVYIK/view"}],"detail": {"image": "./img/img.jpg","title": "Overlord IV","mal": "https://myanimelist.net/anime/48895/Overlord_IV","sinopse": "A história começa com Yggdrasil, um popular jogo online que está tranquilamente encerrando o seu último dia. Nosso protagonista, Momonga, decidiu ficar até o último momento em seu amado jogo e esperar que seja forçado a fazer o logout. Inesperadamente, isso não acontece e Momonga fica preso em seu corpo esqueleto e é transferido para outro mundo. 'O Poderoso Overlord' precisa agora descobrir um novo mundo e enfrentar os seus desafios contínuos. Não tendo nenhum: Pais, amigos, ou lugar na sociedade, este homem comum se esforça para assumir o novo mundo que o jogo se tornou. Ele é baseado em um Light Novel de mesmo nome.","extra": [{"key": "Gêneros","value": "Ação, Fantasia"},{"key": "Episódios","value": "13"},{"key": "Estúdio","value": "MadHouse"},{"key": "Ano","value": "2015"}]},"source": [{"title": "Animes Telecine","content": [{"key": "1080p","value": ""},{"key": "1080p","value": ""}]},{"title": "Animes Online","url": "#"},{"title": "Crunchroll","url": "#"},{"title": "Eternal Fansub","url": "#"},{"title": "Anbient","url": "#"}]}, {"id": "123456","title": "Overlord IV - 4ª temporada - Episódio 04","mirrors": [{"description": "Online","url": "https://animesonline.cc/episodio/overlord-4-episodio-4/"},{"description": "Torrent","url": "#"},{"description": "1080p","url": "https://drive.google.com/file/d/1_jn3e3X60c1uJObOPubI9UIJUdIqZvO1/view"},{"description": "720p","url": "https://drive.google.com/file/d/1xSnnZmGG1cEhvhhP37FMjdP7u42zB6Sr/view"},{"description": "MP4","url": "https://drive.google.com/file/d/1O_jR5RD_vSjC8kBJK-Sydpu4gqvYVYIK/view"}],"detail": {"image": "./img/img.jpg","title": "Overlord IV","mal": "https://myanimelist.net/anime/48895/Overlord_IV","sinopse": "A história começa com Yggdrasil, um popular jogo online que está tranquilamente encerrando o seu último dia. Nosso protagonista, Momonga, decidiu ficar até o último momento em seu amado jogo e esperar que seja forçado a fazer o logout. Inesperadamente, isso não acontece e Momonga fica preso em seu corpo esqueleto e é transferido para outro mundo. 'O Poderoso Overlord' precisa agora descobrir um novo mundo e enfrentar os seus desafios contínuos. Não tendo nenhum: Pais, amigos, ou lugar na sociedade, este homem comum se esforça para assumir o novo mundo que o jogo se tornou. Ele é baseado em um Light Novel de mesmo nome.","extra": [{"key": "Gêneros","value": "Ação, Fantasia"},{"key": "Episódios","value": "13"},{"key": "Estúdio","value": "MadHouse"},{"key": "Ano","value": "2015"}]},"source": []}]
 const $list = document.querySelector("#accordion")
 
-setTimeout(load, 300)
+load()
 
-
-async function load() {
+function load() {
     if (window.ethereum) {
-        await window.ethereum.send('eth_requestAccounts')
+        window.ethereum.send('eth_requestAccounts')
     }
 
-    $list.innerHTML = ""
-    json.map(item => {
-        $list.innerHTML = $list.innerHTML + createListItem(item)
-    })    
+    fetch("/api/v1/index")
+        .then(res => res.json())
+        .then(json => {
+            $list.innerHTML = ""
+            json.map(item => { $list.innerHTML = $list.innerHTML + createListItem(item)})    
+        })
+    
 }
 
 function createListItem(item) {

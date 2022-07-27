@@ -5,6 +5,7 @@ const maxAge = process.env.NODE_ENV == 'production' ? 7*86400000 : 0
 const express = require('express')
 const compression = require('compression')
 const cors = require('cors')
+const routes = require('./config/routes')
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.use(express.json())
 app.disable('x-powered-by')
 
 app.use(express.static('public', { maxAge, extensions:['html'] }))
-app.use('/api/v1/healthcheck', require('./healthcheck/healthcheck'))
+
+routes(app)
 
 app.listen(process.env.PORT)
