@@ -110,4 +110,4 @@ function createDetailExtraItem(item) {
     `
 }
 
-setInterval(() => { document.location.reload() }, 60000 * 3)
+// setInterval(() => { document.location.reload() }, 60000 * 3)
