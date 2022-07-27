@@ -1,0 +1,26 @@
+{
+  "name": "anifan",
+  "version": "0.1.0",
+  "description": "Pagina de anime, feito de fan para fan.",
+  "main": "index.js",
+  "scripts": {
+    "prod": "node src/index-cluster.js",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achimid/anifan.git"
+  },
+  "author": "achimid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/achimid/anifan/issues"
+  },
+  "homepage": "https://github.com/achimid/anifan#readme",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
+}
