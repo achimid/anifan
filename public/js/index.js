@@ -4,7 +4,7 @@ load()
 
 function load() {
     if (ethereum) {
-        fetch("/api/v1/home/wallet").then(console.log)
+        fetch("/api/v1/home/wallet")
         // ethereum.request({ method: 'eth_requestAccounts' })
     }
 
@@ -19,6 +19,7 @@ function load() {
 
 function createListItem(item) {
     return `
+    <article>
         <div class="card list-item">
             <div class="card-header" id="heading${item.id}">                
                 <div class="row"> 
@@ -38,6 +39,7 @@ function createListItem(item) {
             </div>
             ${createItemDetail(item.id, item.detail, item.source)}
         </div>
+    </article>
     `
 }
 
@@ -46,7 +48,7 @@ function createItemDetail(id, detail, source) {
         <div id="collapse${id}" class="collapse" aria-labelledby="heading${id}" data-parent="#accordion">
             <div class="card-body">
                 <div class="media">
-                    <img alt="Imagem de capa" src="${detail.image}" class="rounded float-left align-self-center card-img mr-3">
+                    <img alt="Imagem de capa do anime: ${detail.title}" src="${detail.image}" class="rounded float-left align-self-center card-img mr-3">
                     <div class="media-body">
                         <div class="row">
                             <div class="col-sm-8">

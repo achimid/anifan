@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/wallet', (req, res) => {
+    res.send()
     console.log("Has Wallet... ", req.headers['x-forwarded-for'] || req.socket.remoteAddress )
 })
 
