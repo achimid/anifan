@@ -9,7 +9,8 @@ const cors = require('cors')
 const app = express()
 
 app.use(cors())
-app.use(compression())
+
+app.use(compression({ level: 9 }))
 app.use(express.json())
 app.disable('x-powered-by')
 
