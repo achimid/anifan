@@ -1,5 +1,6 @@
 const healthcheck = require('./healthcheck')
 const home = require('../home/home-controller')
+const ssl = require('../home/ssl-controller')
 
 
 const prefix = process.env.API_PREFIX + process.env.API_VERSION
@@ -9,6 +10,7 @@ module.exports = (app) => {
 
     app.use(`${prefix}`, healthcheck)
     app.use(`${prefix}/home`, home)
+    app.use(ssl)
 
     console.info(`Rotas registradas com sucesso...`)
 
