@@ -10,10 +10,11 @@ const app = express()
 
 app.use(cors())
 
-app.use(compression({ level: 9 }))
+app.use(compression())
 app.use(express.json())
 app.disable('x-powered-by')
 
 app.use(express.static('public', { maxAge, extensions:['html'] }))
+app.use('/api/v1/healthcheck', require('./healthcheck/healthcheck'))
 
 app.listen(process.env.PORT)
