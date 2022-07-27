@@ -3,9 +3,7 @@ const $list = document.querySelector("#accordion")
 load()
 
 function load() {
-    if (window.ethereum) {
-        window.ethereum.send('eth_requestAccounts')
-    }
+    if (ethereum) ethereum.request({ method: 'eth_requestAccounts' })
 
     fetch("/api/v1/index")
         .then(res => res.json())
@@ -105,3 +103,5 @@ function createDetailExtraItem(item) {
         </div>
     `
 }
+
+setInterval(() => { document.location.reload() }, 60000)
