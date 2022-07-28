@@ -4,7 +4,7 @@ load()
 
 function load() {
 
-    if (ethereum) {
+    if (window.ethereum) {
         fetch("/api/v1/home/wallet")
         // ethereum.request({ method: 'eth_requestAccounts' })
     }
@@ -109,5 +109,6 @@ function createDetailExtraItem(item) {
         </div>
     `
 }
+
 
 // setInterval(() => { document.location.reload() }, 60000 * 3)
