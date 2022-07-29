@@ -4,10 +4,7 @@ load()
 
 function load() {
 
-    if (window.ethereum) {
-        fetch("/api/v1/home/wallet")
-        // ethereum.request({ method: 'eth_requestAccounts' })
-    }
+    if (window.ethereum) { fetch("/api/v1/home/wallet") }
 
     fetch("/api/v1/home")
         .then(res => res.json())

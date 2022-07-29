@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const { OK } = require('http-status-codes')
-const fetch = require('node-fetch')
+
+const service = require('./home-service')
+
 
 router.get('/', async (req, res) => {
     console.log("Index call...")
@@ -9,15 +11,8 @@ router.get('/', async (req, res) => {
 
     for (let i = 0; i < json.length; i++) {
         const item = json[i];
-        
-        const malData = await fetch(`https://api.jikan.moe/v4/anime?q=${item.anime}`)
-            .then(res => res.json())
-            .then(j => j.data[0])
 
-        item.detail.image = malData.images.webp.image_url
-        item.detail.mal = malData.url
-        item.detail.sinopse = malData.synopsis
-        
+        item.detail = await service.getDetail(item.anime)
     }
     
     res.status(OK).send(json)
