@@ -15,7 +15,7 @@ app.use(compression())
 app.use(express.json())
 app.disable('x-powered-by')
 
-app.use(express.static('public', { maxAge, extensions:['html'] }))
+app.use(express.static('public', { maxAge, extensions:['html','xml'] }))
 
 routes(app)
 

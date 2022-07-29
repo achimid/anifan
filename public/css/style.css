@@ -4,7 +4,7 @@ body, html {
 
 .bg {
     /* The image used */
-    background-image: url("https://lh4.googleusercontent.com/BY2CD45w2nXt6N2srLBOatIjvSttsx2aIwJmlPnI5ZaKRa7UORGS9X3WcWhjfn_20miT8KaygwG2-_csf4o=w1880-h896-rw"), url("/img/bg.webp");
+    background-image: url("/img/bg.webp");
 
     /* Full height */
     height: 100%;

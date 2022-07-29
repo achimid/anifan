@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /api/v1
+
+User-agent: *
+Allow: /
+
+Sitemap: https://anifan.com.br/sitemap.xml
