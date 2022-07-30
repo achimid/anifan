@@ -21,14 +21,14 @@ function createListItem(item) {
         <div class="card list-item">
             <div class="card-header" id="heading${item.id}">                
                 <div class="row"> 
-                <div class="col-sm-8">
+                <div class="col-md-12 col-lg-8">
                     <h2 class="mb-0">
                     <button class="btn btn-block text-left font-weight-bold" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
                         ${item.title}
                     </button>
                     </h2>
                 </div>                  
-                <div class="col-sm-4 text-right">
+                <div class="col-md-12 col-lg-4 text-right">
                     <h5>
                         ${createListItemMirrors(item.mirrors)}
                     </h5>
@@ -46,15 +46,17 @@ function createItemDetail(id, detail, source) {
         <div id="collapse${id}" class="collapse" aria-labelledby="heading${id}" data-parent="#accordion">
             <div class="card-body">
                 <div class="media">
-                    <img alt="Imagem de capa do anime: ${detail.title}" src="${detail.image}" class="rounded float-left align-self-center card-img mr-3">
+                    <div class="d-none d-lg-block d-xl-block">
+                        <img alt="Imagem de capa do anime: ${detail.title}" src="${detail.image}" class="rounded float-left align-self-center card-img mr-3">
+                    </div>                    
                     <div class="media-body">
                         <div class="row">
-                            <div class="col-sm-8">
+                            <div class="col-md-12 col-lg-8">
                                 <h5 class="mt-0 font-weight-bold">${detail.title}</h5>
                                 <h6><a href="${detail.mal}" class="badge badge-secondary">My Anime List</a></h6>
                                 <p class="text-justify">${detail.sinopse}</p>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-md-12 col-lg-4">
                                 <h5 class="mt-0 text-center">Site | Fansub | Origem</h5>
                                 <div class="list-group">               
                                     ${createDetailSource(source)}
@@ -101,7 +103,7 @@ function createDetailExtra(extra) {
 
 function createDetailExtraItem(item) {
     return `
-        <div class="col-sm-${item.size || 2}">
+        <div class="col-md-6 col-lg-${item.size || 2}">
             <div class="font-weight-bold">${item.key}:</div> ${item.value}
         </div>
     `
