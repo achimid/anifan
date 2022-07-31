@@ -19,7 +19,7 @@ const queryByName = async (name) => {
 const toKey = (str) => str.toUpperCase().replace(new RegExp(" ", 'g'), "")
 
 const storeCache = (details) => {
-    if (!details) return {}
+    if (!details) return []
 
     details.map(detail => {
         console.log("Stored cache ", detail.title)

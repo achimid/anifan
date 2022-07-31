@@ -5,6 +5,9 @@ const getDetail = async (anime) => jikanService.queryByName(anime).then(mapMalDa
 const mapMalDataToDetail = (malData) => {
     const detail = {}
 
+    console.log(malData)
+    if (!malData) return detail
+
     detail.image = malData.images.webp.image_url || malData.images.jpg.image_url
     detail.mal = malData.url
     detail.title = malData.title
