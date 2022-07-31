@@ -7,12 +7,12 @@ const mapMalDataToDetail = (malData) => {
 
     detail.image = malData.images.webp.image_url || malData.images.jpg.image_url
     detail.mal = malData.url
-    detail.sinopse = malData.synopsis    
     detail.title = malData.title
+    detail.sinopse = malData.synopsis || ""
 
     detail.extra = []
     detail.extra.push({"key": "Episódios","value": malData.episodes || "(?)"})
-    detail.extra.push({"key": "Ano","value": malData.year})
+    detail.extra.push({"key": "Ano","value": malData.year || "(?)"})
     detail.extra.push({"key": "Estúdios","value": malData.studios.map(i => i.name).join(", ")})
     detail.extra.push({"key": "Gêneros","value": malData.genres.map(i => i.name).join(", "),"size": 4})
 

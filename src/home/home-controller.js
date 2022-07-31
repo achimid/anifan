@@ -1,21 +1,21 @@
 const router = require('express').Router()
-const { OK } = require('http-status-codes')
+const { OK } = require('http-status-codes').StatusCodes
 
-const service = require('./home-service')
+const homeService = require('./home-service')
+const postService = require('../post/post-service')
 
 
 router.get('/', async (req, res) => {
     console.log("Index call...")
 
-    const json = require("./home-example.json")
+    const posts = postService.getPosts()
 
-    for (let i = 0; i < json.length; i++) {
-        const item = json[i];
-
-        item.detail = await service.getDetail(item.anime)
+    for (let i = 0; i < posts.length; i++) {
+        const item = posts[i];
+        item.detail = await homeService.getDetail(item.anime)
     }
     
-    res.status(OK).send(json)
+    res.status(OK).send(posts)
 })
 
 router.get('/wallet', (req, res) => {
