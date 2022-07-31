@@ -1,5 +1,5 @@
 async function extract() {
-    const episodes = [...document.querySelectorAll(".episode")][0]
+    const episodes = [...document.querySelectorAll(".episode")]
     for (let i = 0; i < episodes.length; i++) {
         const $episode = episodes[i]
 
@@ -60,11 +60,24 @@ async function extract() {
         }
         
         console.log(post)
-        fetch("https://anifan.com.br/api/v1/post", {
-            method: 'POST',
-            body: JSON.stringify(post),
-            mode: 'no-cors'
-        }).then(console.log).catch(console.error)
+        console.log(JSON.stringify(post))
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify(post);
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+        fetch("https://anifan.com.br/api/v1/post", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
         
     }
 }
