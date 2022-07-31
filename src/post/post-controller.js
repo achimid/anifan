@@ -8,6 +8,7 @@ const homeService = require('../home/home-service')
 router.post('/', async (req, res) => {
     
     const data = req.body 
+    console.log("Data: ", data)
 
     postService.createFromData(data)
     homeService.getDetail(data.anime)

@@ -1,5 +1,5 @@
 async function extract() {
-    const episodes = [...document.querySelectorAll(".episode")]
+    const episodes = [...document.querySelectorAll(".episode")][0]
     for (let i = 0; i < episodes.length; i++) {
         const $episode = episodes[i]
 
