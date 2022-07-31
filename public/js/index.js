@@ -54,7 +54,7 @@ function createItemDetail(id, detail, source) {
                             <div class="col-md-12 col-lg-8">
                                 <h5 class="mt-0 font-weight-bold">${detail.title}</h5>
                                 <h6><a href="${detail.mal}" class="badge badge-secondary">My Anime List</a></h6>
-                                <p class="text-justify">${detail.sinopse}</p>
+                                <p class="text-justify line-clamp">${detail.synopsis}</p>
                             </div>
                             <div class="col-md-12 col-lg-4">
                                 <h5 class="mt-0 text-center">Site | Fansub | Origem</h5>

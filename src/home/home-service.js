@@ -8,7 +8,7 @@ const mapMalDataToDetail = (malData) => {
     detail.image = malData.images.webp.image_url || malData.images.jpg.image_url
     detail.mal = malData.url
     detail.title = malData.title
-    detail.sinopse = malData.synopsis || ""
+    detail.synopsis = malData.synopsis || ""
 
     detail.extra = []
     detail.extra.push({"key": "Episódios","value": malData.episodes || "(?)"})
