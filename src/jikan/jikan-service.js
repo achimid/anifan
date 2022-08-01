@@ -15,11 +15,13 @@ const queryByNameCached = async (name) => {
 }
 
 const queryByName = async (name) => {
+    console.log(`Realizando busca do detalhe do anime: ${name}`)
     return fetch(`https://api.jikan.moe/v4/anime?q=${name}&limit=5`)
         .then(res => res.json())
         .then(json => json.data)
         .then(storeCache)
         .then(details => selectBestMatch(name, details))
+        .catch(err => console.error("Erro ao buscar detalhe: ", err))
 }
 
 const selectBestMatch = async (name, details) => {
