@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
     console.log("Data: ", data)
 
     postService.createFromData(data)
-    homeService.getDetail(data.anime)
+    homeService.getDetailCreate(data.anime)
     
     res.status(CREATED).send(data)
 })
