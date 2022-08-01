@@ -47,14 +47,14 @@ function createItemDetail(id, detail, source) {
             <div class="card-body">
                 <div class="media">
                     <div class="d-none d-lg-block d-xl-block">
-                        <img alt="Imagem de capa do anime: ${detail.title}" src="${detail.image}" class="rounded float-left align-self-center card-img mr-3">
+                        <img alt="Imagem de capa do anime: ${detail.title || ""}" src="${detail.image || "/img/bg.webp"}" class="rounded float-left align-self-center card-img mr-3">
                     </div>                    
                     <div class="media-body">
                         <div class="row">
                             <div class="col-md-12 col-lg-8">
-                                <h5 class="mt-0 font-weight-bold">${detail.title}</h5>
-                                <h6><a href="${detail.mal}" class="badge badge-secondary">My Anime List</a></h6>
-                                <p class="text-justify line-clamp">${detail.synopsis}</p>
+                                <h5 class="mt-0 font-weight-bold">${detail.title || "Título"}</h5>
+                                <h6><a href="${detail.mal || "#"}" class="badge badge-secondary">My Anime List</a></h6>
+                                <p class="text-justify line-clamp">${detail.synopsis || ""}</p>
                             </div>
                             <div class="col-md-12 col-lg-4">
                                 <h5 class="mt-0 text-center">Site | Fansub | Origem</h5>
@@ -76,7 +76,7 @@ function createDetailSource(source) {
 
     return source.map(item => {
         return `
-            <a href="${item.url}" class="btn btn-info btn-sm btn-block mt-2">${item.title}</a>
+            <a href="${item.url || "#"}" class="btn btn-info btn-sm btn-block mt-2">${item.title || "Título"}</a>
         `
     }).join("")
 }
