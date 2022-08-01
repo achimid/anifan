@@ -28,6 +28,8 @@ const queryByName = async (name) => {
 
 const selectBestMatch = async (name, details) => {
 
+    if (!details) return null
+
     for (let i = 0; i < details.length; i++) {
         const detail = details[i];
         const similarity = stringSimilarity.compareTwoStrings(name, detail.title);
@@ -47,7 +49,7 @@ const selectBestMatch = async (name, details) => {
 const toKey = (str) => str.toUpperCase().replace(/[^a-zA-Z0-9 ]/g, '').replace(new RegExp(" ", 'g'), "")
 
 const storeCache = (name, detail) => {
-    if (!detail) return {}
+    if (!detail) return null
     
     console.log("Stored cache ", name, detail.title)
     cache[toKey(name)] = detail    
