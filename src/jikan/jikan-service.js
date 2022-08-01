@@ -20,7 +20,7 @@ const queryByName = async (name) => {
         .then(details => details[0])
 }
 
-const toKey = (str) => str.toUpperCase().replace(new RegExp(" ", 'g'), "")
+const toKey = (str) => str.toUpperCase().replace(/[^a-zA-Z0-9 ]/g, '').replace(new RegExp(" ", 'g'), "")
 
 const storeCache = (details) => {
     if (!details) return []
