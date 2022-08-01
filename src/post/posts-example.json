@@ -147,6 +147,30 @@
                 "url": "https://protetor.animestc.xyz/link/MjIxMzMvbG93LzI="
             }
         ]
+    },
+    {
+        "from": "Animes Telecine",
+        "url": "https://www.animestc.net/animes/hanabi-chan-wa-okure-gachi",
+        "title": "Hanabi-chan wa Okure-gachi - Episódio 04",
+        "anime": "Hanabi-chan wa Okure-gachi",
+        "mirrors": [
+            {
+                "description": "Online",
+                "url": "https://www.animestc.net/online/hanabi-chan-wa-okure-gachi-episodio-04"
+            },
+            {
+                "description": "1080p",
+                "url": "https://protetor.animestc.xyz/link/MjIxMzQvaGlnaC8y"
+            },
+            {
+                "description": "720p",
+                "url": "https://protetor.animestc.xyz/link/MjIxMzQvbWVkaXVtLzI="
+            },
+            {
+                "description": "MP4",
+                "url": "https://protetor.animestc.xyz/link/MjIxMzQvbG93LzI="
+            }
+        ]
     }
 ]
 
