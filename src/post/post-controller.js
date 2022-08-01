@@ -16,4 +16,10 @@ router.post('/', async (req, res) => {
     res.status(CREATED).send(data)
 })
 
+require("./posts-example.json")
+    .map(data => {
+        postService.createFromData(data)
+        homeService.getDetailCreate(data.anime)
+    })
+
 module.exports = router

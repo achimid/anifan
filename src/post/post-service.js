@@ -10,7 +10,7 @@ const createFromData = async (data) => {
         anime: data.anime,
         title: data.title,
         mirrors: data.mirrors,
-        source: [{
+        source: data.source || [{
             title: data.from,
             url: data.url
         }]

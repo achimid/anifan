@@ -1,4 +1,4 @@
-const posts = require("./posts-example.json")
+const posts = []
 
 const findAll = () => {
     return posts
