@@ -52,18 +52,18 @@ function createListItem(item) {
         <div class="card list-item">
             <div class="card-header" id="heading${item.id}">                
                 <div class="row"> 
-                <div class="col-md-12 col-lg-8">
-                    <h2 class="mb-0">
-                    <button class="btn btn-block text-left font-weight-bold" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
-                        ${item.title}
-                    </button>
-                    </h2>
-                </div>                  
-                <div class="col-md-12 col-lg-4 text-right">
-                    <h5>
+                    <div class="col-md-12 col-lg-8">
+                        <h2 class="mb-0">
+                        <button class="btn btn-block text-left font-weight-bold" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
+                            ${item.title}
+                        </button>
+                        </h2>
+                    </div>                  
+                    <div class="col-md-12 col-lg-4 text-right">
+                        <h5>
                         ${createListItemMirrors(item.mirrors)}
-                    </h5>
-                </div>                  
+                        </h5>
+                    </div>                  
                 </div>
             </div>
             ${createItemDetail(item.id, item.detail, item.source)}
