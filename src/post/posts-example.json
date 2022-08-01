@@ -171,6 +171,30 @@
                 "url": "https://protetor.animestc.xyz/link/MjIxMzQvbG93LzI="
             }
         ]
+    },
+    {
+        "from": "Animes Telecine",
+        "url": "https://www.animestc.net/animes/shadows-house-2-temporada",
+        "title": "Shadows House 2° Temporada - Episódio 04",
+        "anime": "Shadows House 2° Temporada",
+        "mirrors": [
+            {
+                "description": "Online",
+                "url": "https://www.animestc.net/online/shadows-house-2-temporada-episodio-04"
+            },
+            {
+                "description": "1080p",
+                "url": "https://protetor.animestc.xyz/link/MjIxMTAvaGlnaC8y"
+            },
+            {
+                "description": "720p",
+                "url": "https://protetor.animestc.xyz/link/MjIxMTAvbWVkaXVtLzI="
+            },
+            {
+                "description": "MP4",
+                "url": "https://protetor.animestc.xyz/link/MjIxMTAvbG93LzI="
+            }
+        ]
     }
 ]
 

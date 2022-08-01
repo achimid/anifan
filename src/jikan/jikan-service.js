@@ -32,10 +32,11 @@ const selectBestMatch = async (name, details) => {
         const detail = details[i];
         const similarity = stringSimilarity.compareTwoStrings(name, detail.title);
 
-        if (similarity > 0.8) {
+        if (similarity > 0.6) {
+            console.log(`Similaridade bateu (${similarity}): ${name} != ${detail.title}`)
             return detail
         } else {
-            console.log(`Similaridade não bateu: ${name} != ${detail.title}`)
+            console.error(`Similaridade não bateu (${similarity}): ${name} != ${detail.title}`)
         }
     }
 

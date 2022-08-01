@@ -20,7 +20,7 @@ const mapMalDataToDetail = (malData) => {
     detail.extra.push({"key": "Estúdios","value": malData.studios.map(i => i.name).join(", ")})
     detail.extra.push({"key": "Gêneros","value": malData.genres.map(i => i.name).join(", "),"size": 4})
 
-    console.log("Detalhe mapeado: ", detail)
+    // console.log("Detalhe mapeado: ", detail)
 
     return detail
 }
