@@ -21,8 +21,8 @@ const queryByName = async (name) => {
     return fetch(`https://api.jikan.moe/v4/anime?q=${name}&limit=5`)
         .then(res => res.json())
         .then(json => json.data)
-        .then(storeCache)
         .then(details => selectBestMatch(name, details))
+        .then(detail => storeCache(name, detail))
         .catch(err => console.error("Erro ao buscar detalhe: ", err))
 }
 
@@ -46,15 +46,13 @@ const selectBestMatch = async (name, details) => {
 
 const toKey = (str) => str.toUpperCase().replace(/[^a-zA-Z0-9 ]/g, '').replace(new RegExp(" ", 'g'), "")
 
-const storeCache = (details) => {
-    if (!details) return []
+const storeCache = (name, detail) => {
+    if (!detail) return {}
+    
+    console.log("Stored cache ", name, detail.title)
+    cache[toKey(name)] = detail    
 
-    details.map(detail => {
-        console.log("Stored cache ", detail.title)
-        cache[toKey(detail.title)] = detail
-    })    
-
-    return details
+    return detail
 }
 
 module.exports = {
