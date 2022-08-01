@@ -1,4 +1,6 @@
 const fetch = require('node-fetch')
+const stringSimilarity = require("string-similarity")
+
 
 const cache = {}
 
@@ -17,8 +19,25 @@ const queryByName = async (name) => {
         .then(res => res.json())
         .then(json => json.data)
         .then(storeCache)
-        .then(details => details[0])
+        .then(details => selectBestMatch(name, details))
 }
+
+const selectBestMatch = async (name, details) => {
+
+    for (let i = 0; i < details.length; i++) {
+        const detail = details[i];
+        const similarity = stringSimilarity.compareTwoStrings(name, detail.title);
+
+        if (similarity > 0.8) {
+            return detail
+        } else {
+            console.log(`Similaridade não bateu: ${name} != ${detail.title}`)
+        }
+    }
+
+    return details[0]
+}
+
 
 const toKey = (str) => str.toUpperCase().replace(/[^a-zA-Z0-9 ]/g, '').replace(new RegExp(" ", 'g'), "")
 

@@ -8,7 +8,7 @@ const postService = require('../post/post-service')
 router.get('/', async (req, res) => {
     console.log("Index call...")
 
-    const posts = postService.getPosts()
+    const posts = postService.getPosts().slice(0, 15)
 
     for (let i = 0; i < posts.length; i++) {
         const item = posts[i];
