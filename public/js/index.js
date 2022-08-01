@@ -18,7 +18,16 @@ function load() {
 
 function prepareData(json) {
     return json.map(item => {
-        if (!item.detail) item.detail = {}
+        if (!item.detail || !item.detail.title) {
+            item.detail = {}
+            
+            fetch('/api/v1/detail', {
+                method: 'POST',
+                headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+                body: JSON.stringify({anime: item.anime})
+            })
+        }
+
         if (!item.detail.extra) item.detail.extra = []
         if (!item.detail.title) item.detail.title = 'Título'
         if (!item.detail.image) item.detail.image = '/img/bg.webp'

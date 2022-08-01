@@ -10,7 +10,7 @@ const queryByNameCached = async (name) => {
         console.log("Is cached ", name)   
         return hasCache
     } else {
-        console.log("Is NOT cached!! ", name, cache)
+        console.log("Is NOT cached!! ", name)
     }
 
     return null
