@@ -18,10 +18,21 @@ const getSubscribers = () => {
 const execute = async (url, script) => {    
     console.log('Executando extractor...', url)
     
+    console.log('Criando pagina web')
     const page = await global.browser.newPage()
-    await page.goto(url)  
-    await page.evaluate(script)            
-    await page.close()        
+
+    try {
+        console.log('Navegando para url')
+        await page.goto(url)  
+
+        console.log('Executando script')
+        await page.evaluate(script)                                   
+    } catch (error) {
+        console.error(error)
+    } finally {
+        console.log('Finalizando pagina')
+        await page.close() 
+    }
 
     console.log('Execução finalizada...')
 }
