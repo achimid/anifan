@@ -16,7 +16,7 @@ const getSubscribers = () => {
 } 
 
 const execute = async (url, script) => {    
-    console.log('Executando extractor...', url, script)
+    console.log('Executando extractor...', url)
     
     const page = await global.browser.newPage()
     await page.goto(url)  
