@@ -13,7 +13,7 @@ const browserInit = async () => {
     
     global.browser = await puppeteer.launch(
         {
-            headless: false, 
+            // headless: false, 
             args: [
                 '--no-sandbox', 
                 '--disable-setuid-sandbox',
