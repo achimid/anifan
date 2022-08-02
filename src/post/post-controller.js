@@ -8,10 +8,14 @@ const homeService = require('../home/home-service')
 router.post('/', async (req, res) => {
     
     const data = req.body 
-    console.log("Data: ", data)
 
-    await postService.createFromData(data)
-    await homeService.getDetailCreate(data.anime)
+    if (!postService.hasTitle(data.title)) {
+        await postService.createFromData(data)
+        await homeService.getDetailCreate(data.anime)
+    } else {
+        console.log("Post com o titulo já cadastrado, ignorado. ", data.anime)
+    }
+
     
     res.status(CREATED).send(data)
 })

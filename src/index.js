@@ -9,6 +9,9 @@ const compression = require('compression')
 const app = express()
 const routes = require('./config/routes')
 
+const browserInit = require('./extractor/puppeteer')
+const extractor = require('./extractor/extractor-service')
+
 app.use(cors())
 
 app.use(compression())
@@ -18,5 +21,6 @@ app.disable('x-powered-by')
 app.use(express.static('public', { maxAge, extensions:['html','xml'] }))
 
 routes(app)
+browserInit().then(extractor.start)
 
 app.listen(process.env.PORT)

@@ -4,6 +4,8 @@ const getPosts = () => {
     return repository.findAll()
 }
 
+const hasTitle = repository.hasTitle
+
 const createFromData = async (data) => {
     const post = {
         id: Math.floor(Math.random() * 100000),
@@ -22,5 +24,6 @@ const createFromData = async (data) => {
 
 module.exports = {
     getPosts,
-    createFromData
+    createFromData,
+    hasTitle
 }

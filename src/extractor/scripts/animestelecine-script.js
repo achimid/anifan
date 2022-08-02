@@ -1,5 +1,5 @@
 async function extract() {
-    const episodes = [...document.querySelectorAll(".episode")]
+    const episodes = [...document.querySelectorAll(".episode")].reverse().slice(0,1)
     for (let i = 0; i < episodes.length; i++) {
         const $episode = episodes[i]
 
@@ -74,10 +74,10 @@ async function extract() {
         redirect: 'follow'
         };
 
-        fetch("https://anifan.com.br/api/v1/post", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+        await fetch("https://anifan.com.br/api/v1/post", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
         
     }
 }
