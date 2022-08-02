@@ -16,10 +16,14 @@ const getSubscribers = () => {
 } 
 
 const execute = async (url, script) => {    
+    console.log('Executando extractor...', url, script)
+    
     const page = await global.browser.newPage()
     await page.goto(url)  
     await page.evaluate(script)            
     await page.close()        
+
+    console.log('Execução finalizada...')
 }
 
 const execution = async () => {
@@ -33,7 +37,7 @@ const execution = async () => {
 
 const start = async () => {
     await execution()
-    setInterval(execution, parseInt(process.env.EXTRACTOR_INTERVAL) * 6000)
+    setInterval(execution, parseInt(process.env.EXTRACTOR_INTERVAL) * 60000)
 }
 
 
