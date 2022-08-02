@@ -25,8 +25,13 @@ const execute = async (url, script) => {
         console.log('Navegando para url')
         await page.goto(url)  
 
+        page.on('console', message => {
+            console.log(`${message.type().substr(0, 3).toUpperCase()} ${message.text()}`)
+        })
+
         console.log('Executando script')
         await page.evaluate(script)                                   
+
     } catch (error) {
         console.error(error)
     } finally {
