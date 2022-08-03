@@ -30,6 +30,7 @@
     "puppeteer-extra": "^3.3.4",
     "puppeteer-extra-plugin-adblocker": "^2.13.4",
     "puppeteer-extra-plugin-stealth": "^2.11.0",
+    "puppeteer-page-proxy": "^1.2.8",
     "string-similarity": "^4.0.4"
   }
 }

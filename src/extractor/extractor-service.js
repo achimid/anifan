@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const useProxyI = require('puppeteer-page-proxy')
 
 const readScript = (file) => {
     const script = fs.readFileSync(path.join(__dirname, `./scripts/${file}`), 'utf8')
@@ -11,23 +12,35 @@ const readScript = (file) => {
 
 const getSubscribers = () => {
     return [
-        { url: "https://www.animestc.net", script: readScript("animestelecine-script.js") }
+        { url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), useProxy: true }
     ]
 } 
 
-const execute = async (url, script) => {    
+const execute = async (url, script, useProxy) => {    
     console.log('Executando extractor...', url)
     
     console.log('Criando pagina web')
     const page = await global.browser.newPage()
 
+    const urlProxy = process.env.PAGE_PROXY
+
+    if (useProxy && !!urlProxy) {
+        await page.setRequestInterception(true)
+        page.on('request', async request => {
+            console.log(request.resourceType())
+            if (request.resourceType() === 'image') {
+                request.abort()
+            } else {
+                request._client = request.client
+                await useProxyI(request, urlProxy)
+            }
+        })    
+    }
+    
+
     try {
         console.log('Navegando para url')
-        await page.goto(url)  
-
-        page.on('console', message => {
-            console.log(`${message.type().substr(0, 3).toUpperCase()} ${message.text()}`)
-        })
+        await page.goto(url)
 
         console.log('Executando script')
         await page.evaluate(script)                                   
@@ -47,7 +60,7 @@ const execution = async () => {
     
     for (let i = 0; i < subs.length; i++) {
         const sub = subs[i]
-        await execute(sub.url, sub.script)
+        await execute(sub.url, sub.script, sub.useProxy)
     }
 }
 
