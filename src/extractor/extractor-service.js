@@ -42,7 +42,8 @@ const execute = async (url, script, useProxy) => {
 
     try {
         console.log('Navegando para url')
-        await page.goto(url, {waitUntil: 'networkidle0', timeout: 0})
+        await page.setDefaultNavigationTimeout(parseInt(process.env.PAGE_TIMEOUT))
+        await page.goto(url)
 
         console.log('Executando script')
         await page.evaluate(script)                                   
