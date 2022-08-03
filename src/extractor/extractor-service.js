@@ -39,7 +39,7 @@ const execute = async (url, script, useProxy) => {
 
     try {
         console.log('Navegando para url')
-        await page.goto(url)
+        await page.goto(url, {waitUntil: 'networkidle0', timeout: 0})
 
         console.log('Executando script')
         await page.evaluate(script)                                   
