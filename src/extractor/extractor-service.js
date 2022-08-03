@@ -27,12 +27,12 @@ const execute = async (url, script, useProxy) => {
     if (useProxy && !!urlProxy) {
         await page.setRequestInterception(true)
         page.on('request', async request => {
-            if (request.resourceType() === 'image') {
-                request.abort()
-            } else {
+            // if (request.resourceType() === 'image') {
+            //     request.abort()
+            // } else {
                 request._client = request.client
                 await useProxyI(request, urlProxy)
-            }
+            // }
         })    
     }
 
