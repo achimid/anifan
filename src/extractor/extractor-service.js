@@ -35,7 +35,10 @@ const execute = async (url, script, useProxy) => {
             }
         })    
     }
-    
+
+    page.on('console', message => {
+        console.log(`${message.type().substr(0, 3).toUpperCase()} ${message.text()}`)
+    })    
 
     try {
         console.log('Navegando para url')
