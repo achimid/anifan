@@ -4,8 +4,8 @@ async function extract() {
         const $episode = episodes[i]
 
         const title = $episode.querySelector(".episode-info-title").innerText
-        const anime = $episode.querySelector(".episode-info-title-orange").innerText
-        const url = $episode.querySelector("a.episode-info-title-orange").href
+        const anime = $episode.querySelector(".episode-info-title > a").innerText
+        const url = $episode.querySelector(".episode-info-title > a").href
         const mirrorOnline = $episode.querySelector(".episode-figure > a").href
         
         let mirrorMP4
@@ -56,11 +56,10 @@ async function extract() {
                     description: "MP4",
                     url: mirrorMP4
                 }
-            ]
+            ].filter(m => m.url)
         }
         
         console.log(post)
-        console.log(JSON.stringify(post))
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -68,10 +67,10 @@ async function extract() {
         var raw = JSON.stringify(post);
 
         var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
         };
 
         await fetch("https://anifan.com.br/api/v1/post", requestOptions)
