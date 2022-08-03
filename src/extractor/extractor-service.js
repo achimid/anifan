@@ -27,7 +27,6 @@ const execute = async (url, script, useProxy) => {
     if (useProxy && !!urlProxy) {
         await page.setRequestInterception(true)
         page.on('request', async request => {
-            console.log(request.resourceType())
             if (request.resourceType() === 'image') {
                 request.abort()
             } else {
