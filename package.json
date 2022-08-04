@@ -24,6 +24,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "http-status-codes": "^2.2.0",
+    "mongoose": "^5.11.9",
     "node-cron": "^2.0.3",
     "node-fetch": "^2.6.1",
     "puppeteer": "^15.5.0",
@@ -32,6 +33,7 @@
     "puppeteer-extra-plugin-stealth": "^2.11.0",
     "puppeteer-page-proxy": "^1.2.8",
     "string-similarity": "^4.0.4",
+    "uuid": "^8.3.2",
     "web-push": "^3.5.0"
   }
 }

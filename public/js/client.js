@@ -20,27 +20,15 @@ async function registerWebPush() {
         console.log('Registered service worker');
 
         console.log('Registering push');
-        const subscriptionInfo = await registration.pushManager.subscribe({
-            
+        const subscription = await registration.pushManager.subscribe({            
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
         });
 
-        const subscription = {
-            userId: getId(),
-            subscription: subscriptionInfo
-        }
-
         console.log('Registered push');
 
         console.log('Sending push');
-        await fetch('/api/v1/push/subscribe', {
-            method: 'POST',
-            body: JSON.stringify(subscription),
-            headers: {
-                'content-type': 'application/json'
-            }
-        });
+        // await fetchPost('/api/v1/user/subscribe', subscription);
 
         console.log('Sent push');
     } else {
@@ -63,15 +51,49 @@ function urlBase64ToUint8Array(base64String) {
     return outputArray;
 }  
 
-function createId() {
+async function createId() {
     if (localStorage.getItem('ani_fan_id')) {
-        return getId()
+        return localStorage.getItem('ani_fan_id')
     }
     
-    localStorage.setItem('ani_fan_id', uuid.v4())
-    return getId()
+    return fetch('/api/v1/user', { method: 'POST'})
+        .then(res => res.json())
+        .then(({ _id }) => {
+            localStorage.setItem('ani_fan_id', _id)
+            return _id
+        })    
 }
 
 function getId() {
-    return localStorage.getItem('ani_fan_id')
+    const id = localStorage.getItem('ani_fan_id')
+    
+    if (id == undefined || id == 'undefined') {
+        setTimeout(createId, 5000)
+        return null
+    }
+
+    return id
+}
+
+async function fetchGet(uri) {    
+    return fetch(uri, { 
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json', 
+            'X-Anifan-User-UUID': getId()
+        }
+    })
+}
+
+async function fetchPost(uri, body = {}) {
+    return fetch(uri, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'X-Anifan-User-UUID': getId()
+        },
+        body: JSON.stringify(body)
+    })
+    
 }

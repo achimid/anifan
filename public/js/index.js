@@ -4,11 +4,7 @@ load()
    
 
 async function load() {
-    createId()
-
-    if (window.ethereum) { fetch("/api/v1/home/wallet") }
-
-    return fetch("/api/v1/home")
+    return fetchGet("/api/v1/home")
         .then(res => res.json())
         .then(prepareData)
         .then(json => {
@@ -23,11 +19,7 @@ function prepareData(json) {
         if (!item.detail || !item.detail.title) {
             item.detail = {}
             
-            fetch('/api/v1/detail', {
-                method: 'POST',
-                headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-                body: JSON.stringify({anime: item.anime})
-            })
+            fetchPost('/api/v1/detail', {anime: item.anime})
         }
 
         if (!item.detail.extra) item.detail.extra = []
@@ -63,7 +55,7 @@ function createListItem(item) {
                     </div>                  
                     <div class="col-md-12 col-lg-4 text-right">
                         <h5>
-                        ${createListItemMirrors(item.mirrors)}
+                            ${createListItemMirrors(item.mirrors)}                            
                         </h5>
                     </div>                  
                 </div>
@@ -92,8 +84,8 @@ function createItemDetail(id, detail, source) {
                                     </div>
                                     <div class="col-md-3 text-left">                                     
                                         <div class="float-right">
-                                            <button type="button" onClick="subscribePost(this, ${id})" class="btn btn-secondary btn-sm mt-2 text-left" title="Ser notificado quando um novo episódio desse anime for lançado">
-                                                <i data-feather="bell"></i>
+                                            <button type="button" onClick="subscribePost(this, ${id})" class="badge badge-secondary" title="Ser notificado quando um novo episódio desse anime for lançado">
+                                                <i data-feather="bell"></i> Quero ser notificado
                                             </button>
                                             <button type="button" href="#" class="d-none btn btn-secondary btn-sm mt-2 text-left" title="Marcar esse episódio como assistido.">
                                                 <i data-feather="eye"></i>
@@ -166,7 +158,7 @@ function messageAllowNotification() {
 
 function messagePostSubscriveSuccess(post) {
     Toastify({
-        text: `Ok! Você será notificado quando houver um novo lançamento de ${post.anime}`,
+        text: `Combinado! Você será notificado quando houver um novo lançamento de ${post.anime}`,
         duration: 5000  
     }).showToast();
 }
@@ -198,14 +190,10 @@ async function allowWebPush() {
 }
 
 async function fetchPostSubscription(event, id){ 
-    fetch(`/api/v1/post/${id}/subscribe/notification`, {
-        method: 'POST',
-        headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-        body: JSON.stringify({userId: getId()})
-    })
-    .then(res => res.json())
-    .then(messagePostSubscriveSuccess)
-    .then(() => event.remove())
+    fetchPost(`/api/v1/post/${id}/subscribe/notification`)
+        .then(res => res.json())
+        .then(messagePostSubscriveSuccess)
+        .then(() => event.remove())
 }
 
 async function subscribePost(event, id) {
@@ -220,3 +208,4 @@ async function subscribePost(event, id) {
 function eventDone() {
     feather.replace()
 }
+

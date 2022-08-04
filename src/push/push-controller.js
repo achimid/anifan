@@ -4,7 +4,8 @@ const { CREATED } = require('http-status-codes').StatusCodes
 const pushService = require('./push-service')
 
 router.post('/subscribe', async (req, res) => {
-    const { userId, subscription } = req.body
+    const subscription = req.body
+    const userId = req._user.id
 
     pushService.subscribe(userId, subscription)
 
