@@ -6,6 +6,7 @@ async function extract() {
         const title = $episode.querySelector(".episode-info-title").innerText
         const anime = $episode.querySelector(".episode-info-title > a").innerText
         const url = $episode.querySelector(".episode-info-title > a").href
+        const episode = parseInt($episode.querySelector(".episode-info-title :nth-child(3)").innerText.match(/\d+/g))
         const mirrorOnline = $episode.querySelector(".episode-figure > a").href
         
         let mirrorMP4
@@ -39,6 +40,7 @@ async function extract() {
             url,
             title,
             anime,
+            episode,
             mirrors: [
                 {
                     description: "Online",

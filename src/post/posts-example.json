@@ -1,5 +1,30 @@
 [
     {
+        "from": "Animes Telecine",
+        "url": "https://www.animestc.net/animes/warau-arsnotoria-sun",
+        "title": "Warau Arsnotoria Sun! - Episódio 04",
+        "anime": "Warau Arsnotoria Sun!",
+        "episode": 4,
+        "mirrors": [
+            {
+                "description": "Online",
+                "url": "https://www.animestc.net/online/warau-arsnotoria-sun-episodio-05"
+            },
+            {
+                "description": "1080p",
+                "url": "https://protetor.animestc.xyz/link/MjIxNTQvaGlnaC8y"
+            },
+            {
+                "description": "720p",
+                "url": "https://protetor.animestc.xyz/link/MjIxNTQvbWVkaXVtLzI="
+            },
+            {
+                "description": "MP4",
+                "url": "https://protetor.animestc.xyz/link/MjIxNTQvbG93LzI="
+            }
+        ]
+    },
+    {
         "id": "654",
         "anime": "Overlord IV",
         "title": "Overlord IV - 4ª temporada - Episódio 04",

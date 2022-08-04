@@ -1,8 +1,8 @@
 const jikanService = require('../jikan/jikan-service')
 
-const getDetail = async (anime) => jikanService.queryByNameCached(anime).then(mapMalDataToDetail)
+const getDetail = async ({ anime }) => jikanService.queryByNameCached(anime).then(mapMalDataToDetail)
 
-const getDetailCreate = async (anime) => jikanService.queryByName(anime).then(mapMalDataToDetail)
+const getDetailCreate = async ({ anime }) => jikanService.queryByName(anime).then(mapMalDataToDetail)
 
 const mapMalDataToDetail = (malData) => {
     const detail = {}

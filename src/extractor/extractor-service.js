@@ -27,18 +27,16 @@ const execute = async (url, script, useProxy) => {
     if (useProxy && !!urlProxy) {
         await page.setRequestInterception(true)
         page.on('request', async request => {
-            // if (request.resourceType() === 'image') {
-            //     request.abort()
-            // } else {
-                request._client = request.client
-                await useProxyI(request, urlProxy)
-            // }
+            request._client = request.client
+            await useProxyI(request, urlProxy)            
         })    
     }
 
-    page.on('console', message => {
-        console.log(`${message.type().substr(0, 3).toUpperCase()} ${message.text()}`)
-    })    
+    if (process.env.ENABLE_CONSOLE_LOG === 'true') {
+        page.on('console', message => {
+            console.log(`${message.type().substr(0, 3).toUpperCase()} ${message.text()}`)
+        })    
+    }
 
     try {
         console.log('Navegando para url')
@@ -68,8 +66,10 @@ const execution = async () => {
 }
 
 const start = async () => {
-    await execution()
-    setInterval(execution, parseInt(process.env.EXTRACTOR_INTERVAL) * 60000)
+    if (process.env.ENABLE_EXTRACTOR === 'true') {
+        await execution()
+        setInterval(execution, parseInt(process.env.EXTRACTOR_INTERVAL) * 60000)
+    }
 }
 
 

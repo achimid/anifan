@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
     const data = req.body 
     console.log("Data: ", data)
 
-    await homeService.getDetailCreate(data.anime)
+    await homeService.getDetailCreate(data)
     
     res.status(CREATED).send(data)
 })

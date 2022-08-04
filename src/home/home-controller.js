@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 
     for (let i = 0; i < posts.length; i++) {
         const item = posts[i];
-        item.detail = await homeService.getDetail(item.anime)
+        item.detail = await homeService.getDetail(item)
     }
     
     res.status(OK).send(posts)
