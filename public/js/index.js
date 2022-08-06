@@ -16,19 +16,22 @@ async function load() {
 
 function prepareData(json) {
     return json.map(item => {
-        if (!item.detail || !item.detail.title) {
+        item.detail = item.anime
+        item.id = item._id
+
+        if (!item.detail || !item.detail.name) {
             item.detail = {}
             
             fetchPost('/api/v1/detail', {anime: item.anime})
         }
 
         if (!item.detail.extra) item.detail.extra = []
-        if (!item.detail.title) item.detail.title = 'Título'
+        if (!item.detail.name) item.detail.name = 'Título'
         if (!item.detail.image) item.detail.image = '/img/bg.webp'
-        if (!item.detail.synopsis) item.detail.synopsis = ''
+        if (!item.detail.description) item.detail.description = ''
         if (!item.detail.mal) item.detail.mal = ''
-        if (!item.source || !item.source.length) {
-            item.source = item.source.map(src => { 
+        if (!item.sources || !item.sources.length) {
+            item.sources = item.sources.map(src => { 
                 if (!src.url) src.url = '#'
                 if (!src.url) src.title = 'Título'
 
@@ -60,31 +63,31 @@ function createListItem(item) {
                     </div>                  
                 </div>
             </div>
-            ${createItemDetail(item.id, item.detail, item.source)}
+            ${createItemDetail(item.id, item.detail, item.sources)}
         </div>
     </article>
     `
 }
 
-function createItemDetail(id, detail, source) {
+function createItemDetail(id, detail, sources) {
     return `
         <div id="collapse${id}" class="collapse" aria-labelledby="heading${id}" data-parent="#accordion">
             <div class="card-body">
                 <div class="media">
                     <div class="d-none d-lg-block d-xl-block">
-                        <img alt="Imagem de capa do anime: ${detail.title}" src="${detail.image}" class="rounded float-left align-self-center card-img mr-3">
+                        <img alt="Imagem de capa do anime: ${detail.name}" src="${detail.image}" class="rounded float-left align-self-center card-img mr-3">
                     </div>                    
                     <div class="media-body">
                         <div class="row">
                             <div class="col-md-12 col-lg-8">
                                 <div class="row"> 
                                     <div class="col-md-9"> 
-                                        <h5 class="mt-0 font-weight-bold">${detail.title}</h5>                                
+                                        <h5 class="mt-0 font-weight-bold">${detail.name}</h5>                                
                                         <h6><a href="${detail.mal}" class="badge badge-secondary">My Anime List</a></h6>                                        
                                     </div>
                                     <div class="col-md-3 text-left">                                     
                                         <div class="float-right">
-                                            <button type="button" onClick="subscribePost(this, ${id})" class="badge badge-secondary" title="Ser notificado quando um novo episódio desse anime for lançado">
+                                            <button type="button" onClick="subscribePost(this, '${detail._id}')" class="badge badge-secondary" title="Ser notificado quando um novo episódio desse anime for lançado">
                                                 <i data-feather="bell"></i> Quero ser notificado
                                             </button>
                                             <button type="button" href="#" class="d-none btn btn-secondary btn-sm mt-2 text-left" title="Marcar esse episódio como assistido.">
@@ -93,12 +96,12 @@ function createItemDetail(id, detail, source) {
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-justify line-clamp">${detail.synopsis}</p>
+                                <p class="text-justify line-clamp">${detail.description}</p>
                             </div>
                             <div class="col-md-12 col-lg-4">
                                 <h5 class="mt-0 text-center">Site | Fansub | Origem</h5>
                                 <div class="list-group">               
-                                    ${createDetailSource(source)}
+                                    ${createDetailSource(sources)}
                                 </div>
                             </div>
                         </div>      
@@ -110,10 +113,10 @@ function createItemDetail(id, detail, source) {
     `
 }
 
-function createDetailSource(source) {
-    if (source.length == 0) return `<p class="text-center"> Nenhum conteúdo disponível </p>`
+function createDetailSource(sources) {
+    if (sources.length == 0) return `<p class="text-center"> Nenhum conteúdo disponível </p>`
 
-    return source.map(item => {
+    return sources.map(item => {
         return `
             <a href="${item.url}" class="btn btn-info btn-sm btn-block mt-2">${item.title}</a>
         `
@@ -158,7 +161,7 @@ function messageAllowNotification() {
 
 function messagePostSubscriveSuccess(post) {
     Toastify({
-        text: `Combinado! Você será notificado quando houver um novo lançamento de ${post.anime}`,
+        text: `Combinado! Você será notificado quando houver um novo lançamento desse anime!`,
         duration: 5000  
     }).showToast();
 }
@@ -189,9 +192,8 @@ async function allowWebPush() {
     })
 }
 
-async function fetchPostSubscription(event, id){ 
-    fetchPost(`/api/v1/post/${id}/subscribe/notification`)
-        .then(res => res.json())
+async function fetchPostSubscription(event, animeId){ 
+    fetchPost(`/api/v1/push/subscribe`, { animeId })
         .then(messagePostSubscriveSuccess)
         .then(() => event.remove())
 }

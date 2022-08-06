@@ -28,7 +28,7 @@ async function registerWebPush() {
         console.log('Registered push');
 
         console.log('Sending push');
-        // await fetchPost('/api/v1/user/subscribe', subscription);
+        await fetchPost('/api/v1/push/register', subscription);
 
         console.log('Sent push');
     } else {

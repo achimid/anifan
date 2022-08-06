@@ -16,6 +16,14 @@ const queryByNameCached = async (name) => {
     return null
 }
 
+const queryByNameBestMatch = async (name, limit = 10) => {
+    return fetch(`https://api.jikan.moe/v4/anime?q=${name}&limit=${limit}`)
+        .then(res => res.json())
+        .then(json => json.data)
+        .then(details => selectBestMatch(name, details))
+        .catch(err => console.error("Erro ao buscar detalhe: ", err))
+}
+
 const queryByName = async (name) => {
     console.log(`Realizando busca do detalhe do anime: ${name}`)
     return fetch(`https://api.jikan.moe/v4/anime?q=${name}&limit=5`)
@@ -59,5 +67,6 @@ const storeCache = (name, detail) => {
 
 module.exports = {
     queryByName,
-    queryByNameCached
+    queryByNameCached,
+    queryByNameBestMatch
 }

@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
     return userService
         .create(req._user || req.body)
         .then(user => res.status(CREATED).json(user)) 
-        .catch(res.onError)   
+        .catch(res.onError)
 })
 
 module.exports = router

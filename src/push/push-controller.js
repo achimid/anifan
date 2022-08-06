@@ -3,22 +3,24 @@ const { CREATED } = require('http-status-codes').StatusCodes
 
 const pushService = require('./push-service')
 
-router.post('/subscribe', async (req, res) => {
+router.post('/register', async (req, res) => {
+    
+    const user = req._user
     const subscription = req.body
-    const userId = req._user.id
 
-    pushService.subscribe(userId, subscription)
-
-    res.status(CREATED).send()
+    return pushService.register(user, subscription)
+        .then(() => res.status(CREATED).send())
+        .catch(res.onError)
 })
 
-router.post('/send/:id', async (req, res) => {
-    const userId = req.params.id
-    const body = req.body
+router.post('/subscribe', async (req, res) => {
+    
+    const user = req._user
+    const { animeId } = req.body
 
-    pushService.sendPushById(userId, body)
-
-    res.status(CREATED).send()
+    return pushService.subscribe(user, animeId)
+        .then(() => res.status(CREATED).send())
+        .catch(res.onError)
 })
 
 

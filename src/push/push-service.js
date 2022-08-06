@@ -5,13 +5,28 @@ const privateVapidKey = process.env.PUSH_KEY_PRIVATE
 
 webpush.setVapidDetails('mailto:anifan-site@outlook.com', publicVapidKey, privateVapidKey)
 
-const subscribers = {}
+const userService = require('../user/user-service')
 
-const subscribe = (userId, subscription) => {    
-    if (!subscribers[userId]) sendPushWellcomeTest(subscription)
+const register = async (user, subscription) => {    
+    if (user.webSubscription) return
 
-    subscribers[userId] = subscription
+    await userService.register(user, subscription)
+    await sendPushWellcomeTest(subscription)
 }
+
+const notifyAnime = async (release) => {
+    const animeId = release.anime.id
+    const episode = release.episode
+
+    const userToNotify = await userService.findByAnimeToNotify(animeId)
+    const userNotNotified = userToNotify
+        .filter(u => u.webSubscription)
+        .filter(u => u.releaseNotified.filter(n => n.animeId == animeId && n.episode == episode).length == 0)
+
+    userNotNotified.map(user => sendReleasePush(user, release.title))
+}
+
+const subscribe = userService.subscribe
 
 const sendPushWellcomeTest = (subscription) => {
     const payload = JSON.stringify({ 
@@ -37,7 +52,7 @@ const sendPushById = (userId, body) => {
     sendPush(subscribers[userId], JSON.stringify(body))
 }
 
-const sendReleasePush = (userId, title) => {
+const sendReleasePush = (user, title) => {
     const payload = JSON.stringify({ 
         title: 'Ani Fan - Novo lançamento', 
         options: {
@@ -45,11 +60,13 @@ const sendReleasePush = (userId, title) => {
             data: { url: '/' }
         }
     })
-    sendPush(subscribers[userId], payload)
+    sendPush(user.webSubscription, payload)
 }
 
 module.exports = {
+    register,
     subscribe,
+    notifyAnime,
     sendPushById,
     sendReleasePush
 }
