@@ -75,7 +75,7 @@ async function extract() {
             redirect: 'follow'
         };
 
-        await fetch("https://anifan.com.br/api/v1/post", requestOptions)
+        await fetch("https://anifan.com.br/api/v1/integration", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
