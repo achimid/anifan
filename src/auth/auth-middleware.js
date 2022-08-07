@@ -1,5 +1,7 @@
 const userService = require('../user/user-service')
 
+const cache = {}
+
 var auth = async (req, res, next) => {
     var start = now('milli')
 
@@ -8,7 +10,14 @@ var auth = async (req, res, next) => {
     
     if (uuid && uuid != 'undefined' && uuid != 'null') {
       try {
-        req._user = await userService.findById(uuid)        
+        if (cache._user) {
+          req._user = cache._user
+        } else {
+          req._user = await userService.findById(uuid)        
+          cache._user = req._user
+
+          setTimeout(() => delete cache._user, 5 * 60000)
+        }
       } catch (error) {
         console.error("Erro ao buscar user", error)
       }

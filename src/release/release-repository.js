@@ -1,10 +1,17 @@
 const Release = require('./release-model')
 const mongoose = require('mongoose')
 
-let cache = []
+const cache = {}
 
 const findLast = async () => {
-    return Release.find().sort({'updatedAt': 1}).limit(15)
+    if (cache.last && cache.last.length > 0) return cache.last
+
+    const last = await Release.find().sort({_id: -1}).limit(20).lean()
+
+    cache.last = last
+    setTimeout(() => { delete cache.last }, 60000)
+
+    return last
 }
 
 const save = async (release) => {
