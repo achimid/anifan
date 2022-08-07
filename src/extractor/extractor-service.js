@@ -13,7 +13,7 @@ const readScript = (file) => {
 const getSubscribers = () => {
     return [
         { url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), useProxy: true },
-        { url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js"), useProxy: false },
+        { url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js"), useProxy: true },
     ]
 } 
 
