@@ -11,7 +11,7 @@ const schema = mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+        required: false
     },
     url: {
         type: String,

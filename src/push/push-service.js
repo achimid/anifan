@@ -33,7 +33,8 @@ const sendPushWellcomeTest = (subscription) => {
         title: 'Ani Fan - Bem vindo', 
         options: {
             body: 'Obrigado com nos visitar.\n\nOs próximos lançamentos serão enviados em forma de notificação para esse dispositivo.', 
-            data: { url: '/' }
+            data: { url: '/' },
+            icon: '/img/bg.webp'
         }
     })
 
@@ -57,7 +58,8 @@ const sendReleasePush = (user, title) => {
         title: 'Ani Fan - Novo lançamento', 
         options: {
             body: `[${title}] acabou de ser lançado. Hora de assistir!`, 
-            data: { url: '/' }
+            data: { url: '/' },
+            icon: '/img/bg.webp'
         }
     })
     sendPush(user.webSubscription, payload)

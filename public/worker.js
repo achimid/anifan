@@ -4,7 +4,7 @@ self.addEventListener('push', ev => {
 })
 
 self.addEventListener('notificationclick', function(event) {
-    let url = '/'/
+    let url = '/'
     event.notification.close(); // Android needs explicit close.
     event.waitUntil(
         clients.matchAll().then( windowClients => {

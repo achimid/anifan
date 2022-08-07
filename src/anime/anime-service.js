@@ -1,7 +1,7 @@
 const jikanClient = require('./jikan-client')
 const Anime = require('./anime-model')
 
-const { save, findById, findByName } = require('./anime-repository')
+const { save, findById, findByName, findIdByNameSimilarity } = require('./anime-repository')
 
 const findByAnimeName = async (name) => {
     const anime = await findByName(name)
@@ -39,8 +39,11 @@ const fromJikan = (jikan) => {
 }
 
 
+
+
 module.exports = {
     findById,
     createByName,
     findByAnimeName,
+    findIdByNameSimilarity,
 }

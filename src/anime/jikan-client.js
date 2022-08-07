@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const stringSimilarity = require("string-similarity")
+const stringSimilarity = require('string-similarity')
 
 
 const cache = {}

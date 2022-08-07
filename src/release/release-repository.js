@@ -1,4 +1,5 @@
 const Release = require('./release-model')
+const mongoose = require('mongoose')
 
 let cache = []
 
@@ -10,15 +11,12 @@ const save = async (release) => {
     return release.save()
 }
 
-const findByAnimeNameAndEpisode = async (animeName, episode) => {
-    const l = await Release.find()
-    const f = await Release.findOne({ 'anime.name': animeName , episode })
-
-    return f
+const findByAnimeIdAndEpisode = async (animeId, episode) => {
+    return Release.findOne({ 'anime._id': mongoose.Types.ObjectId(animeId) , episode })
 }
 
 module.exports = {
     save,
     findLast,
-    findByAnimeNameAndEpisode
+    findByAnimeIdAndEpisode
 }

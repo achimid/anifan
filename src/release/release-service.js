@@ -7,7 +7,9 @@ const findLast = releaseRepository.findLast
 
 const processRelease = async (integration) => {
     const { anime, episode } = integration
-    const release = await releaseRepository.findByAnimeNameAndEpisode(anime, episode)
+    
+    const animeId = (await animeService.findIdByNameSimilarity(anime))._id.toString()
+    const release = await releaseRepository.findByAnimeIdAndEpisode(animeId, episode)
 
     if (!release) return createFromIntegration(integration).then(pushService.notifyAnime)
 
@@ -24,6 +26,8 @@ const alreadyHasSource = (release, i) => {
 }
 
 const updateFromIntegration = async (release, i) => {
+    console.log(`Updating release. anime=${i.anime} episode=${i.episode}`)
+
     release.sources.push({
         title: i.from,
         url: i.url
@@ -33,6 +37,8 @@ const updateFromIntegration = async (release, i) => {
 }
 
 const createFromIntegration = async (i) => {
+    console.log(`Creating new release. anime=${i.anime} episode=${i.episode}`)
+    
     return releaseRepository.save(new Release({
         title: i.title,
         episode: i.episode,
