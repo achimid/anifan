@@ -1,5 +1,5 @@
 async function extract() {
-    const episodes = [...document.querySelectorAll(".episode")].slice(0,3).reverse()
+    const episodes = [...document.querySelectorAll(".episode")].slice(0, 15).reverse()
     for (let i = 0; i < episodes.length; i++) {
         const $episode = episodes[i]
 
