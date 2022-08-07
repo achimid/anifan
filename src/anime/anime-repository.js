@@ -33,7 +33,7 @@ const selectBestMatch = (list, name) => {
         const item = list[i];
         const similarity = stringSimilarity.compareTwoStrings(name, item.name);
 
-        if (similarity > 0.7) return item
+        if (similarity > 0.6) return item
     }
 
     return undefined
