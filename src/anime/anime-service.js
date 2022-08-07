@@ -19,6 +19,8 @@ const createByName = async (name) => {
 
 const fromJikan = (jikan) => {
 
+    if (!jikan) return jikan
+
     const anime = new Anime({
         url: jikan.url,
         name: jikan.title,

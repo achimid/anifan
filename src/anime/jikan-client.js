@@ -16,7 +16,7 @@ const queryByNameCached = async (name) => {
     return null
 }
 
-const queryByNameBestMatch = async (name, limit = 10) => {
+const queryByNameBestMatch = async (name, limit = 20) => {
     return fetch(`https://api.jikan.moe/v4/anime?q=${name}&limit=${limit}`)
         .then(res => res.json())
         .then(json => json.data)
@@ -50,6 +50,7 @@ const selectBestMatch = async (name, details) => {
         }
     }
 
+    console.log(`Nenhum anime encontrado com esse nome: ${name}`, details.map(d => d.title))
     return details[0]
 }
 

@@ -36,7 +36,7 @@ const selectBestMatch = (list, name) => {
         if (similarity > 0.6) return item
     }
 
-    return list[0]
+    return undefined
 }
 
 module.exports = {
