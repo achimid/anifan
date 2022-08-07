@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 let cache = []
 
 const findLast = async () => {
-    return Release.find().sort({'updatedAt': -1}).limit(15)
+    return Release.find().sort({'updatedAt': 1}).limit(15)
 }
 
 const save = async (release) => {
