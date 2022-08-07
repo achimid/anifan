@@ -2,6 +2,7 @@ const Release = require('./release-model')
 const pushService = require('../push/push-service')
 const animeService = require('../anime/anime-service')
 const releaseRepository = require('./release-repository')
+const animeModel = require('../anime/anime-model')
 
 const findLast = releaseRepository.findLast
 
@@ -39,10 +40,13 @@ const updateFromIntegration = async (release, i) => {
 const createFromIntegration = async (i) => {
     console.log(`Creating new release. anime=${i.anime} episode=${i.episode}`)
     
+    const anime = await animeService.findByAnimeName(i.anime)
+    anime.source = undefined
+
     return releaseRepository.save(new Release({
         title: i.title,
         episode: i.episode,
-        anime: await animeService.findByAnimeName(i.anime),
+        anime,
         mirrors: (i.data || {}).mirrors,
         sources: [{ title: i.from, url: i.url }]
     }))

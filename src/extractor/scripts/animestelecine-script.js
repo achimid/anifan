@@ -50,24 +50,26 @@ async function extract() {
             title,
             anime,
             episode,
-            mirrors: [
-                {
-                    description: "Online",
-                    url: mirrorOnline
-                },
-                {
-                    description: "1080p",
-                    url: mirror1080p
-                },
-                {
-                    description: "720p",
-                    url: mirror720p
-                },
-                {
-                    description: "MP4",
-                    url: mirrorMP4
-                }
-            ].filter(m => m.url)
+            data: {
+                mirrors: [
+                    {
+                        description: "Online",
+                        url: mirrorOnline
+                    },
+                    {
+                        description: "1080p",
+                        url: mirror1080p
+                    },
+                    {
+                        description: "720p",
+                        url: mirror720p
+                    },
+                    {
+                        description: "MP4",
+                        url: mirrorMP4
+                    }
+                ].filter(m => m.url)
+            }
         }
         
         console.log(post)

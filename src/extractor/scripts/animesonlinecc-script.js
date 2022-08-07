@@ -21,12 +21,14 @@ async function extract() {
             title,
             anime,
             episode,
-            mirrors: [
-                {
-                    description: "Online",
-                    url: mirrorOnline
-                }
-            ].filter(m => m.url)
+            data: {
+                mirrors: [
+                    {
+                        description: "Online",
+                        url: mirrorOnline
+                    }
+                ].filter(m => m.url)
+            }
         }
         
         console.log(post)
