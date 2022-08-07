@@ -20,7 +20,7 @@ const findByName = async (name) => {
 }
 
 const findIdByNameSimilarity = async (name) => {
-    const allAnimes = await Anime.find({}, { name }).lean()
+    const allAnimes = await Anime.find().lean()
 
     return selectBestMatch(allAnimes, name)
 }
@@ -33,7 +33,7 @@ const selectBestMatch = (list, name) => {
         const item = list[i];
         const similarity = stringSimilarity.compareTwoStrings(name, item.name);
 
-        if (similarity > 0.6) return item
+        if (similarity > 0.7) return item
     }
 
     return undefined

@@ -51,7 +51,7 @@ const selectBestMatch = async (name, details) => {
     }
 
     console.log(`Nenhum anime encontrado com esse nome: ${name}`, details.map(d => d.title))
-    return details[0]
+    return null
 }
 
 
