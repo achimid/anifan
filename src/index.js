@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const maxAge = process.env.NODE_ENV == 'production' ? 7 * 86400000 : 0
+const maxAge = process.env.NODE_ENV == 'production' ? 1 * 86400000 : 0
 
 const cors = require('cors')
 const express = require('express')

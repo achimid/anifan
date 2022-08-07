@@ -8,7 +8,7 @@ const findLast = releaseRepository.findLast
 const processRelease = async (integration) => {
     const { anime, episode } = integration
     
-    const animeId = (await animeService.findIdByNameSimilarity(anime))._id.toString()
+    const animeId = (await animeService.findByAnimeName(anime))._id.toString()
     const release = await releaseRepository.findByAnimeIdAndEpisode(animeId, episode)
 
     if (!release) return createFromIntegration(integration).then(pushService.notifyAnime)
