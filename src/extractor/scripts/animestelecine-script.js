@@ -25,21 +25,21 @@ async function extract() {
         const $blue = $episode.querySelector(".episode-info-tabs-item-blue")
         if ($blue) {
             $blue.click()
-            await new Promise(r => setTimeout(r, 100))
+            await new Promise(r => setTimeout(r, 50))
             mirrorMP4 = [...$episode.querySelectorAll(".episode-info-links > a")].filter(e => e.innerText.trim() == "Drive" || e.innerText.trim() == "Mega" )[0].href        
         }
         
         const $green = $episode.querySelector(".episode-info-tabs-item-green")
         if ($green) {
             $green.click()
-            await new Promise(r => setTimeout(r, 100))
+            await new Promise(r => setTimeout(r, 50))
             mirror720p = [...$episode.querySelectorAll(".episode-info-links > a")].filter(e => e.innerText.trim() == "Drive" || e.innerText.trim() == "Mega" )[0].href
         }
 
         const $red = $episode.querySelector(".episode-info-tabs-item-red")
         if ($red) {
             $red.click()
-            await new Promise(r => setTimeout(r, 100))
+            await new Promise(r => setTimeout(r, 50))
             mirror1080p = [...$episode.querySelectorAll(".episode-info-links > a")].filter(e => e.innerText.trim() == "Drive" || e.innerText.trim() == "Mega" )[0].href
         }
         
