@@ -30,6 +30,13 @@ function prepareData(json) {
         if (!item.detail.image) item.detail.image = '/img/bg.webp'
         if (!item.detail.description) item.detail.description = ''
         if (!item.detail.mal) item.detail.mal = ''
+        if (item.detail.extra && item.detail.extra.length > 0) {
+            item.detail.extra = item.detail.extra.map(extra => { 
+                if (!extra.value) extra.value = '(?)'
+
+                return extra
+            })
+        }
         if (!item.sources || !item.sources.length) {
             item.sources = item.sources.map(src => { 
                 if (!src.url) src.url = '#'
@@ -49,14 +56,14 @@ function createListItem(item) {
         <div class="card list-item">
             <div class="card-header" id="heading${item.id}">                
                 <div class="row"> 
-                    <div class="col-md-12 col-lg-8">
+                    <div class="col-md-12 col-lg-9">
                         <h2 class="mb-0">
-                        <button class="btn btn-block text-left font-weight-bold" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
-                            ${item.title}
-                        </button>
+                            <button class="btn btn-block text-left font-weight-bold collapsed" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
+                                ${item.title}
+                            </button>
                         </h2>
                     </div>                  
-                    <div class="col-md-12 col-lg-4 text-right">
+                    <div class="col-md-12 col-lg-3 text-right">
                         <h5>
                             ${createListItemMirrors(item.mirrors)}                            
                         </h5>
@@ -70,6 +77,7 @@ function createListItem(item) {
 }
 
 function createItemDetail(id, detail, sources) {
+
     return `
         <div id="collapse${id}" class="collapse" aria-labelledby="heading${id}" data-parent="#accordion">
             <div class="card-body">
@@ -99,7 +107,7 @@ function createItemDetail(id, detail, sources) {
                                 <p class="text-justify line-clamp">${detail.description}</p>
                             </div>
                             <div class="col-md-12 col-lg-4">
-                                <h5 class="mt-0 text-center">Site | Fansub | Origem</h5>
+                                <h5 class="mt-0 text-center">Sites</h5>
                                 <div class="list-group">               
                                     ${createDetailSource(sources)}
                                 </div>
@@ -204,10 +212,8 @@ async function subscribePost(event, id) {
         .then(() => fetchPostSubscription(event, id))   
 }
 
-
-// setInterval(() => { document.location.reload() }, 60000 * 3)
-
 function eventDone() {
     feather.replace()
+    document.querySelector('.collapsed').click()
 }
 
