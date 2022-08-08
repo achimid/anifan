@@ -34,6 +34,8 @@ const updateFromIntegration = async (release, i) => {
         url: i.url
     })
 
+    release.updatedAt = new Date()
+
     return releaseRepository.save(release)
 }
 
