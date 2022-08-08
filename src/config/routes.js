@@ -14,7 +14,7 @@ module.exports = (app) => {
 
     app.use(errorHandler)
     app.use(`${prefix}`, healthcheck)
-    app.use(`${prefix}/home`, auth, home)
+    app.use(`${prefix}/home`, home)
     app.use(`${prefix}/push`, auth, push)
     app.use(`${prefix}/user`, auth, user)
     app.use(`${prefix}/integration`, integration)
