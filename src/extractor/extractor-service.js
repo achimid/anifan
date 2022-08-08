@@ -12,9 +12,9 @@ const readScript = (file) => {
 
 const getSubscribers = () => {
     return [
-        // { url: "https://www.anbient.com/", script: readScript("anbient-script.js"), useProxy: false },
-        // { url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), useProxy: true },
-        // { url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js"), useProxy: true },
+        { url: "https://www.anbient.com/", script: readScript("anbient-script.js"), useProxy: false },
+        { url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), useProxy: true },
+        { url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js"), useProxy: true },
         { url: "https://goanimes.net/", script: readScript("goanimes-script .js"), useProxy: true },
         { url: "https://www.crunchyroll.com/pt-br/videos/anime/updated", script: readScript("crunchyroll-script.js"), useProxy: true },
         { url: "https://darkmahou.net/", script: readScript("darkanimes-script.js"), useProxy: true },
