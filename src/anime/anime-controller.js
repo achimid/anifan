@@ -6,7 +6,19 @@ const animeService = require('./anime-service')
 router.get('/:id', async (req, res) => {
     return animeService.findById(req.params.id)
         .then(anime => res.status(OK).json(anime))
-        .catch(res.onError)   
+        .catch(res.onError)
+})
+
+router.get('/:id', async (req, res) => {
+    return animeService.update(req.params.id, req.body)
+        .then(anime => res.status(OK).json(anime))
+        .catch(res.onError)
+})
+
+router.get('/', async (req, res) => {
+    return animeService.findByAnimeName(req.query.name)
+        .then(anime => res.status(OK).json(anime))
+        .catch(res.onError)
 })
 
 module.exports = router

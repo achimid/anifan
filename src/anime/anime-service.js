@@ -1,7 +1,7 @@
 const jikanClient = require('./jikan-client')
 const Anime = require('./anime-model')
 
-const { save, findById, findByName, findIdByNameSimilarity } = require('./anime-repository')
+const { save, findById, findByName, update  } = require('./anime-repository')
 
 const findByAnimeName = async (name) => {
     const anime = await findByName(name)
@@ -19,11 +19,12 @@ const createByName = async (name) => {
 
 const fromJikan = (jikan) => {
 
-    if (!jikan) return jikan
+    if (!jikan) throw 'Nenhum anime encontrado!! ---------------------- '
 
     const anime = new Anime({
         url: jikan.url,
         name: jikan.title,
+        names: [...new Set([jikan.title, jikan.title_english, jikan.title_japanese, ...jikan.title_synonyms, ...jikan.titles.map(t => t.title)])],
         description: jikan.synopsis,
         image: jikan.images.webp.image_url || jikan.images.jpg.image_url,
         extra: [
@@ -44,6 +45,7 @@ const fromJikan = (jikan) => {
 
 
 module.exports = {
+    update,
     findById,
     createByName,
     findByAnimeName,

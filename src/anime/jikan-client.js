@@ -40,14 +40,20 @@ const selectBestMatch = async (name, details) => {
 
     for (let i = 0; i < details.length; i++) {
         const detail = details[i];
-        const similarity = stringSimilarity.compareTwoStrings(name, detail.title);
+        const namesDetail = [...new Set([detail.title, detail.title_english, detail.title_japanese, ...detail.title_synonyms, ...detail.titles.map(t => t.title)].filter(s => s))]
+        for (let j = 0; j < namesDetail.length; j++) {
+            const nameDetail = namesDetail[j].toUpperCase()
+            const nameCompateble = name.toUpperCase().replace('Temporada'.toUpperCase(), 'Season'.toUpperCase())
+            
+            const similarity = stringSimilarity.compareTwoStrings(nameCompateble, nameDetail);
 
-        if (similarity > 0.6) {
-            console.log(`Similaridade bateu (${similarity}): ${name} != ${detail.title}`)
-            return detail
-        } else {
-            console.error(`Similaridade não bateu (${similarity}): ${name} != ${detail.title}`)
-        }
+            if (similarity > 0.6) {
+                console.log(`Similaridade bateu (${similarity}): ${name} != ${nameDetail}`)
+                return detail
+            } else {
+                console.error(`Similaridade não bateu (${similarity}): ${name} != ${nameDetail}`)
+            }
+        }        
     }
 
     console.log(`Nenhum anime encontrado com esse nome: ${name}`, details.map(d => d.title))

@@ -11,8 +11,14 @@ const findById = async (id) => {
     return Anime.findById(id)
 }
 
+const update = async (id, data) => {
+    const anime = await findById(id, data)
+
+    return save({...anime, data})
+}
+
 const findByName = async (name) => {
-    const found = await Anime.findOne({ name })
+    const found = await Anime.findOne({  $or: [ { name }, { names: name }] })
     
     if (found) return found
 
@@ -31,7 +37,7 @@ const selectBestMatch = (list, name) => {
 
     for (let i = 0; i < list.length; i++) {
         const item = list[i];
-        const similarity = stringSimilarity.compareTwoStrings(name, item.name);
+        const similarity = stringSimilarity.compareTwoStrings(name.toUpperCase(), item.name.toUpperCase());
 
         if (similarity > 0.6) return item
     }
@@ -41,6 +47,7 @@ const selectBestMatch = (list, name) => {
 
 module.exports = {
     save,
+    update,
     findById,
     findByName,
     findIdByNameSimilarity

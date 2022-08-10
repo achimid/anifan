@@ -5,6 +5,10 @@ const schema = mongoose.Schema({
         type: String,
         required: true
     },
+    names: {
+        type: [{ type: String }],
+        default: undefined
+    },
     image: {
         type: String,
         required: false
