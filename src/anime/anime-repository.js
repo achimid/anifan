@@ -1,5 +1,5 @@
 const Anime = require('./anime-model')
-const stringSimilarity = require('string-similarity')
+const stringUtils = require('../utils/string-utils')
 
 const cache = []
 
@@ -28,21 +28,16 @@ const findByName = async (name) => {
 const findIdByNameSimilarity = async (name) => {
     const allAnimes = await Anime.find().lean()
 
-    return selectBestMatch(allAnimes, name)
+    return selectBestMatch(name, allAnimes)
 }
 
-const selectBestMatch = (list, name) => {
+const selectBestMatch = (name, allAnimes) => {
 
-    if (!list) return null
+    if (!allAnimes) return null
 
-    for (let i = 0; i < list.length; i++) {
-        const item = list[i];
-        const similarity = stringSimilarity.compareTwoStrings(name.toUpperCase(), item.name.toUpperCase());
+    const fMapName = (d) => [d.name, ...d.names]
 
-        if (similarity > 0.6) return item
-    }
-
-    return undefined
+    return stringUtils.selectBestMatch(name, allAnimes, fMapName)
 }
 
 module.exports = {

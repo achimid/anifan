@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const stringSimilarity = require('string-similarity')
+const stringUtils = require('../utils/string-utils')
 
 
 const cache = {}
@@ -38,26 +38,15 @@ const selectBestMatch = async (name, details) => {
 
     if (!details) return null
 
-    for (let i = 0; i < details.length; i++) {
-        const detail = details[i];
-        const namesDetail = [...new Set([detail.title, detail.title_english, detail.title_japanese, ...detail.title_synonyms, ...detail.titles.map(t => t.title)].filter(s => s))]
-        for (let j = 0; j < namesDetail.length; j++) {
-            const nameDetail = namesDetail[j].toUpperCase()
-            const nameCompateble = name.toUpperCase().replace('Temporada'.toUpperCase(), 'Season'.toUpperCase())
-            
-            const similarity = stringSimilarity.compareTwoStrings(nameCompateble, nameDetail);
+    const fMapName = (d) => { return [
+        d.title, 
+        d.title_english, 
+        d.title_japanese, 
+        ...d.title_synonyms, 
+        ...d.titles.map(t => t.title)
+    ]}
 
-            if (similarity > 0.6) {
-                console.log(`Similaridade bateu (${similarity}): ${name} != ${nameDetail}`)
-                return detail
-            } else {
-                console.error(`Similaridade não bateu (${similarity}): ${name} != ${nameDetail}`)
-            }
-        }        
-    }
-
-    console.log(`Nenhum anime encontrado com esse nome: ${name}`, details.map(d => d.title))
-    return null
+    return stringUtils.selectBestMatch(name, details, fMapName)
 }
 
 
