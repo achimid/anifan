@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const useProxyI = require('puppeteer-page-proxy')
+const cookiesService = require('./cookies/cookies-service')
 
 const readScript = (file) => {
     const script = fs.readFileSync(path.join(__dirname, `./scripts/${file}`), 'utf8')
@@ -13,11 +14,11 @@ const readScript = (file) => {
 const getSubscribers = () => {
     return [
         { url: "https://www.anbient.com/", script: readScript("anbient-script.js"), useProxy: false },
-        { url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), useProxy: true },
-        { url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js"), useProxy: true },
-        { url: "https://goanimes.net/", script: readScript("goanimes-script .js"), useProxy: true },
-        { url: "https://www.crunchyroll.com/pt-br/videos/anime/updated", script: readScript("crunchyroll-script.js"), useProxy: true },
-        { url: "https://darkmahou.net/", script: readScript("darkanimes-script.js"), useProxy: true },
+        { url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), useProxy: false },
+        { url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js"), useProxy: false },
+        { url: "https://goanimes.net/", script: readScript("goanimes-script .js"), useProxy: false },
+        { url: "https://www.crunchyroll.com/pt-br/videos/anime/updated", script: readScript("crunchyroll-script.js"), useProxy: false },
+        { url: "https://darkmahou.net/", script: readScript("darkanimes-script.js"), useProxy: false },
     ]
 } 
 
@@ -48,20 +49,30 @@ const execute = async (url, script, useProxy) => {
     try {
         console.log('Navegando para url')
         await page.setDefaultNavigationTimeout(parseInt(process.env.PAGE_TIMEOUT))
+                
+
+        const cookies = cookiesService.getCookies(url)
+        if (cookies && cookies.length > 0) {
+            await page.setCookie(...cookies)
+        }
+
         await page.goto(url)
 
         console.log('Executando script')
         await page.evaluate(script)                                   
 
+        await cookiesService.saveCookies(url, page)
     } catch (error) {
         console.error(error)
     } finally {
-        console.log('Finalizando pagina')
+        console.log('Finalizando pagina')        
         await page.close() 
     }
 
     console.log('Execução finalizada...')
 }
+
+
 
 const execution = async () => {
     const subs = getSubscribers()

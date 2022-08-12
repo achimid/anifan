@@ -12,6 +12,7 @@ const { databaseInit } = require('./config/database')
 
 const browserInit = require('./extractor/puppeteer')
 const extractor = require('./extractor/extractor-service')
+const { startCacheCookies } = require('./extractor/cookies/cookies-service')
 
 app.use(cors())
 
@@ -24,6 +25,7 @@ app.use(express.static('public', { maxAge, extensions:['html','xml'] }))
 databaseInit()
     .then(() => routes(app))
     .then(browserInit)
+    .then(startCacheCookies)
     .then(extractor.start)
 
 app.listen(process.env.PORT)
