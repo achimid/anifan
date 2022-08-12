@@ -58,7 +58,7 @@ function createListItem(item) {
                 <div class="row"> 
                     <div class="col-md-12 col-lg-9">
                         <h2 class="mb-0">
-                            <button class="btn btn-block text-left font-weight-bold collapsed" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">
+                            <button class="btn btn-block text-left font-weight-bold collapsed" type="button" data-toggle="collapse" data-target="#collapse${item.id}" aria-expanded="true" aria-controls="collapse${item.id}">                                
                                 ${item.title}
                             </button>
                         </h2>
@@ -91,7 +91,7 @@ function createItemDetail(id, detail, sources) {
                                 <div class="row"> 
                                     <div class="col-md-9"> 
                                         <h5 class="mt-0 font-weight-bold">${detail.name}</h5>                                
-                                        <h6><a href="${detail.mal}" class="badge badge-secondary">My Anime List</a></h6>                                        
+                                        <h6><a href="${detail.url}" class="badge badge-secondary">My Anime List</a></h6>                                        
                                     </div>
                                     <div class="col-md-3 text-left">                                     
                                         <div class="float-right">
