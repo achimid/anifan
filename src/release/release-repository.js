@@ -9,7 +9,7 @@ const findLast = async () => {
     const last = await Release.find().sort({updatedAt: -1, _id: -1}).limit(20).lean()
 
     cache.last = last
-    setTimeout(() => { delete cache.last }, 60000)
+    setTimeout(() => { delete cache.last }, 20000)
 
     return last
 }
