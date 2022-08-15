@@ -13,18 +13,18 @@ const readScript = (file) => {
 
 const getSubscribers = () => {
     return [
-        { url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), useProxy: true },
-        { url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js"), useProxy: true },
-        { url: "https://goanimes.net/", script: readScript("goanimes-script .js"), useProxy: true },
-        { url: "https://darkmahou.net/", script: readScript("darkanimes-script.js"), useProxy: false },
-        { url: "https://www.crunchyroll.com/pt-br/videos/anime/updated", script: readScript("crunchyroll-script.js"), useProxy: false },
-        { url: "https://www.anbient.com/", script: readScript("anbient-script.js"), useProxy: false },
-        { url: "https://animeshouse.net/", script: readScript("animeshouse-script.js"), useProxy: false },
-        // { url: "https://sakuraanimes.com/home?categoria=1", script: readScript("animeshouse-script.js"), useProxy: false },
+        { useProxy: true, skipImage: false, url: "https://www.animestc.net", script: readScript("animestelecine-script.js")},
+        { useProxy: true, skipImage: true, url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js")},
+        { useProxy: true, skipImage: true, url: "https://goanimes.net/", script: readScript("goanimes-script .js")},
+        { useProxy: false, skipImage: true, url: "https://darkmahou.net/", script: readScript("darkanimes-script.js")},
+        { useProxy: false, skipImage: true, url: "https://www.crunchyroll.com/pt-br/videos/anime/updated", script: readScript("crunchyroll-script.js")},
+        { useProxy: false, skipImage: true, url: "https://www.anbient.com/", script: readScript("anbient-script.js")},
+        { useProxy: false, skipImage: true, url: "https://animeshouse.net/", script: readScript("animeshouse-script.js")},
+        // { useProxy: false, skipImage: true, url: "https://sakuraanimes.com/home?categoria=1", script: readScript("animeshouse-script.js")},
     ]
 } 
 
-const execute = async (url, script, useProxy) => {    
+const execute = async (url, script, useProxy, skipImage) => {    
     console.log('Executando extractor...', url)
     
     console.log('Criando pagina web')
@@ -33,11 +33,10 @@ const execute = async (url, script, useProxy) => {
     page.setBypassCSP(true)
 
     const urlProxy = process.env.PAGE_PROXY
-    const skipImage = process.env.PAGE_SKIP_IMAGE
     
     await page.setRequestInterception(true)
     page.on('request', async request => {
-        if (skipImage == 'true' && request.resourceType() === 'image') {
+        if (skipImage && request.resourceType() === 'image') {
             request.abort()
         } else if (useProxy && !!urlProxy) {
             request._client = request.client
@@ -87,7 +86,7 @@ const execution = async () => {
     
     for (let i = 0; i < subs.length; i++) {
         const sub = subs[i]
-        await execute(sub.url, sub.script, sub.useProxy)
+        await execute(sub.url, sub.script, sub.useProxy, sub.skipImage)
     }
 }
 
