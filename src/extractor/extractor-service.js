@@ -74,7 +74,7 @@ const execute = async (url, script, useProxy) => {
         console.error(error)
     } finally {
         console.log('Finalizando pagina')        
-        // await page.close() 
+        await page.close() 
     }
 
     console.log('Execução finalizada...')
