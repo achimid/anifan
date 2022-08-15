@@ -23,8 +23,10 @@ const schema = mongoose.Schema({
     },
     data: { 
         type: Object,
-        required: false
+        required: false,
     }    
 }, { versionKey: false, timestamps: true })
+
+schema.index({createdAt: 1},{expireAfterSeconds: 172800}) // 2 dias
 
 module.exports = mongoose.model('integration-event', schema)

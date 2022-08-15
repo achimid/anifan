@@ -11,11 +11,7 @@ const schema = mongoose.Schema({
     },
     anime: { type: Object }, 
     mirrors: [{ type: Object }], 
-    sources: [{ type: Object }],
-    createdAt: { 
-        type: Date,
-        default: new Date() 
-    }
+    sources: [{ type: Object }]
 }, { versionKey: false, timestamps: true })
 
 module.exports = mongoose.model('release', schema)

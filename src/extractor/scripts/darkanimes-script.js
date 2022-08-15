@@ -1,5 +1,5 @@
-
 async function extract() {
+    
     const episodes = [...document.querySelectorAll('.bixbox')[1].querySelectorAll('article')].reverse()
     for (let i = 0; i < episodes.length; i++) {
         const $episode = episodes[i]

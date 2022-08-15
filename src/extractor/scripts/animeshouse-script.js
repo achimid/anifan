@@ -1,16 +1,16 @@
 async function extract() {
-    const episodes = [...document.querySelectorAll('.item.episodes')].reverse()
+    const episodes = [...document.querySelectorAll('.animation-2 .item')].reverse()
     for (let i = 0; i < episodes.length; i++) {
         const $episode = episodes[i]
 
         const url = $episode.querySelector('a').href
-        const anime = $episode.querySelector('.eptitle').innerText.split(' Episodio')[0].trim()
-        const episode = parseInt($episode.querySelector('.eptitle').innerText.split(' Episodio')[1].trim().match(/\d+/g))
+        const anime = $episode.querySelector('.data h3').innerText.trim()
+        const episode = parseInt($episode.querySelector('.epi').innerText.trim().match(/\d+/g))
         const title = `${anime} - Episódio ${episode}`
         const mirrorOnline = url
         
         const post = {
-            from: "Animes Online CC",
+            from: "Animes House",
             url,
             title,
             anime,

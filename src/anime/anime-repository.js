@@ -1,7 +1,7 @@
 const Anime = require('./anime-model')
 const stringUtils = require('../utils/string-utils')
 
-const cache = []
+const animeNotFound = []
 
 const save = async (anime) => {
     return anime.save()
@@ -22,11 +22,25 @@ const findByName = async (name) => {
     
     if (found) return found
 
-    return findIdByNameSimilarity(name)
+    const similar = await findIdByNameSimilarity(name)
+
+    if (similar && !similar.names.includes(name)) {
+        similar.names.push(name)
+        await save(similar)
+    } else {
+        animeNotFound.push(name)
+    }
+
+    return similar
 }
 
 const findIdByNameSimilarity = async (name) => {
-    const allAnimes = await Anime.find().lean()
+    if (animeNotFound.includes(name)) {
+        console.log('*-*-*-*-*-*- Anime já identificado como not found')
+        return null
+    }
+
+    const allAnimes = await Anime.find() // TODO: Melhorar e corrigir isso, vai quebrar o sistema no futuro.
 
     return selectBestMatch(name, allAnimes)
 }
@@ -40,10 +54,15 @@ const selectBestMatch = (name, allAnimes) => {
     return stringUtils.selectBestMatch(name, allAnimes, fMapName)
 }
 
+const listAnimeNotFound = async () => {
+    return animeNotFound
+}
+
 module.exports = {
     save,
     update,
     findById,
     findByName,
-    findIdByNameSimilarity
+    findIdByNameSimilarity,
+    listAnimeNotFound
 }

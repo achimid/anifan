@@ -13,12 +13,14 @@ const readScript = (file) => {
 
 const getSubscribers = () => {
     return [
-        { url: "https://www.anbient.com/", script: readScript("anbient-script.js"), useProxy: false },
         { url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), useProxy: true },
         { url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js"), useProxy: true },
         { url: "https://goanimes.net/", script: readScript("goanimes-script .js"), useProxy: true },
-        { url: "https://www.crunchyroll.com/pt-br/videos/anime/updated", script: readScript("crunchyroll-script.js"), useProxy: false },
         { url: "https://darkmahou.net/", script: readScript("darkanimes-script.js"), useProxy: false },
+        { url: "https://www.crunchyroll.com/pt-br/videos/anime/updated", script: readScript("crunchyroll-script.js"), useProxy: false },
+        { url: "https://www.anbient.com/", script: readScript("anbient-script.js"), useProxy: false },
+        { url: "https://animeshouse.net/", script: readScript("animeshouse-script.js"), useProxy: false },
+        // { url: "https://sakuraanimes.com/home?categoria=1", script: readScript("animeshouse-script.js"), useProxy: false },
     ]
 } 
 
@@ -31,14 +33,20 @@ const execute = async (url, script, useProxy) => {
     page.setBypassCSP(true)
 
     const urlProxy = process.env.PAGE_PROXY
-
-    if (useProxy && !!urlProxy) {
-        await page.setRequestInterception(true)
-        page.on('request', async request => {
+    const skipImage = process.env.PAGE_SKIP_IMAGE
+    
+    await page.setRequestInterception(true)
+    page.on('request', async request => {
+        if (skipImage == 'true' && request.resourceType() === 'image') {
+            request.abort()
+        } else if (useProxy && !!urlProxy) {
             request._client = request.client
             await useProxyI(request, urlProxy)            
-        })    
-    }
+        } else {
+            request.continue()            
+        }
+    })    
+    
 
     if (process.env.ENABLE_CONSOLE_LOG === 'true') {
         page.on('console', message => {
@@ -66,7 +74,7 @@ const execute = async (url, script, useProxy) => {
         console.error(error)
     } finally {
         console.log('Finalizando pagina')        
-        await page.close() 
+        // await page.close() 
     }
 
     console.log('Execução finalizada...')

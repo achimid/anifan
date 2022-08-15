@@ -107,7 +107,6 @@ function createItemDetail(id, detail, sources) {
                                 <p class="text-justify line-clamp">${detail.description}</p>
                             </div>
                             <div class="col-md-12 col-lg-4">
-                                <h5 class="mt-0 text-center">Sites</h5>
                                 <div class="list-group">               
                                     ${createDetailSource(sources)}
                                 </div>

@@ -1,6 +1,4 @@
-
 async function extract() {
-    await new Promise(r => setTimeout(r, 1000))
 
     const episodes = [...document.querySelectorAll('#main_content li.group-item')].reverse()
     for (let i = 0; i < episodes.length; i++) {

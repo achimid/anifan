@@ -1,8 +1,6 @@
 function getAnime(str) {
     let anime = str.replace(/\d/g, '').replace(/.°/g, '').replace(/.ª/g, '').replace('Temporada', '').trim()
-    anime = anime.replace(' -', '').replace('- ', '')
-    anime = anime.replace('Aoashi', 'Ao Ashi')
-    
+    anime = anime.replace(' -', '').replace('- ', '')    
 
     return anime
 }
@@ -12,10 +10,11 @@ async function extract() {
     for (let i = 0; i < episodes.length; i++) {
         const $episode = episodes[i]
 
-        const title = $episode.querySelector(".episode-info-title").innerText
-        const anime = getAnime($episode.querySelector(".episode-info-title > a").innerText)
+        
         const url = $episode.querySelector(".episode-info-title > a").href
+        const anime = getAnime($episode.querySelector(".episode-info-title > a").innerText)
         const episode = parseInt($episode.querySelector(".episode-info-title :nth-child(3)").innerText.match(/\d+/g))
+        const title = `${anime} - Episódio ${episode}`
         const mirrorOnline = $episode.querySelector(".episode-figure > a").href
         
         let mirrorMP4

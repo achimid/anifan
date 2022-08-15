@@ -18,11 +18,7 @@ const schema = mongoose.Schema({
             type: Object,
             required: false
         }
-    }], 
-    createdAt: { 
-        type: Date,
-        default: new Date() 
-    }
+    }]
 }, { versionKey: false, timestamps: true })
 
 module.exports = mongoose.model('user', schema)

@@ -9,13 +9,13 @@ router.get('/:id', async (req, res) => {
         .catch(res.onError)
 })
 
-router.get('/:id', async (req, res) => {
-    return animeService.update(req.params.id, req.body)
-        .then(anime => res.status(OK).json(anime))
-        .catch(res.onError)
-})
-
 router.get('/', async (req, res) => {
+    if (!req.query.name) {
+        return animeService.listAnimeNotFound()
+            .then(anime => res.status(OK).json(anime))
+            .catch(res.onError)
+    }
+
     return animeService.findByAnimeName(req.query.name)
         .then(anime => res.status(OK).json(anime))
         .catch(res.onError)

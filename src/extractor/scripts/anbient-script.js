@@ -16,11 +16,7 @@ function range(rangeArray) {
 }
 
 function getSemiTitle(str) {
-    return capitalizeWords(str).replace('Aoashi', 'Ao Ashi').replace('(completo)','').replace('(fim)','').trim()
-}
-
-function getTitle(anime, episode) {
-    return `${anime} - Episodio ${episode}`
+    return capitalizeWords(str).replace('(completo)','').replace('(fim)','').trim()
 }
 
 function getAnime(str) {    
@@ -58,7 +54,7 @@ async function extract() {
         
         for (let j = 0; j < episodeList.length; j++) {
             const episode = parseInt(episodeList[j])
-            const title = getTitle(anime, episode)
+            const title = `${anime} - Episódio ${episode}`
 
             const post = {
                 from: "Anbient",
