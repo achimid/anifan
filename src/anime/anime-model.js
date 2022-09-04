@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const schema = mongoose.Schema({    
     name: {
         type: String,
-        required: true
+        required: true,
+        unique : true
     },
     names: {
         type: [{ type: String }],

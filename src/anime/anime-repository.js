@@ -17,6 +17,8 @@ const update = async (id, data) => {
     return save({...anime, data})
 }
 
+const findByExactName = async (name) => Anime.findOne({ name })
+
 const findByName = async (name) => {
     const found = await Anime.findOne({  $or: [ { name }, { names: name }] })
     
@@ -63,6 +65,7 @@ module.exports = {
     update,
     findById,
     findByName,
+    findByExactName,
     findIdByNameSimilarity,
     listAnimeNotFound
 }
