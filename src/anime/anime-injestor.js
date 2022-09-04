@@ -29,7 +29,8 @@ const loadJobInjestInfo = async () => {
         hasNextPage = json.pagination.has_next_page
         page = page + 1
 
-        console.log(`Page: ${page}`)
+        console.log(`Page: ${page}`)        
+        await sleep(500)
     } while (hasNextPage)
 
 }

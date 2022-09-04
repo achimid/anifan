@@ -28,7 +28,7 @@ databaseInit()
     .then(loadJobInjestInfo)
     .then(browserInit)
     .then(startCacheCookies)
-    // .then(extractor.start)
+    .then(extractor.start)
 
 
 app.listen(process.env.PORT)
