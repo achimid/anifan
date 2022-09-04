@@ -4,7 +4,7 @@ const animeService = require('./anime-service')
 const loadJobInjestInfo = async () => {
     
 
-    let page = 1
+    let page = 27
     let hasNextPage = true
 
     do {
@@ -20,7 +20,7 @@ const loadJobInjestInfo = async () => {
                 } catch (error) {
                     console.error('Erro no job de buscar animes:', error.message)
                 }
-                
+                await sleep(100)
             }                    
         } catch (error) {
             console.error('Erro no job de buscar animes na API Jikan:', json)
