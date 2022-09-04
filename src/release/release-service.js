@@ -34,6 +34,16 @@ const updateFromIntegration = async (release, i) => {
         url: i.url
     })
 
+    if (release.mirrors.length <= 1) {
+        for (let j = 0; j < i.data.mirrors.length; j++) {
+            const mirror = i.data.mirrors[j];
+            
+            if (release.mirrors.filter(m => m.description == mirror.description).length == 0) {
+                release.mirrors.push(mirror)    
+            }
+        }
+    }
+
     release.updatedAt = new Date()
 
     return releaseRepository.save(release)

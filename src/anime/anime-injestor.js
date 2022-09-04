@@ -4,7 +4,7 @@ const animeService = require('./anime-service')
 const loadJobInjestInfo = async () => {
     
 
-    let page = 105
+    let page = 150
     let hasNextPage = true
 
     do {
