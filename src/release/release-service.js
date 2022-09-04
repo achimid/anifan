@@ -57,7 +57,7 @@ const createFromIntegration = async (i) => {
 
     return releaseRepository.save(new Release({
 
-        title: `[Episódio: ${i.episode.toString().padStart(3, '0')}] - ${anime.name}`,
+        title: `Episódio: ${(i.episode || '0').toString().padStart(2, '0')} - ${anime.name}`,
         episode: i.episode,
         anime,
         mirrors: (i.data || {}).mirrors,

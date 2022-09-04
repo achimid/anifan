@@ -25,7 +25,7 @@ app.use(express.static('public', { maxAge, extensions:['html','xml'] }))
 
 databaseInit()
     .then(() => routes(app))
-    // .then(loadJobInjestInfo)
+    .then(loadJobInjestInfo)
     .then(browserInit)
     .then(startCacheCookies)
     .then(extractor.start)
