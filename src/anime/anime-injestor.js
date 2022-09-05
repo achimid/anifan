@@ -21,18 +21,18 @@ const loadJobInjestInfo = async () => {
                 } catch (error) {
                     console.error('Erro no job de buscar animes:', error.message)
                 }
-                await sleep(20000)
+                await sleep(60000)
             }                    
 
             hasNextPage = json.pagination.has_next_page
-            await sleep(20000)
+            await sleep(60000)
 
         } catch (error) {
             console.error('Erro no job de buscar animes na API Jikan:', json)
         }        
         
         page = page + 1
-        
+
         console.log(`Page: ${page}`)        
     } while (hasNextPage)
 
