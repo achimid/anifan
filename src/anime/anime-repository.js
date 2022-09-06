@@ -42,9 +42,14 @@ const findIdByNameSimilarity = async (name) => {
         return null
     }
 
-    const allAnimes = await Anime.find() // TODO: Melhorar e corrigir isso, vai quebrar o sistema no futuro.
+    const allAnimes = await Anime.find({}, '_id name names').lean() // TODO: Melhorar e corrigir isso, vai quebrar o sistema no futuro.
 
-    return selectBestMatch(name, allAnimes)
+    const selectedId = await selectBestMatch(name, allAnimes)
+    if (selectedId) {
+        return Anime.findById(selectedId)
+    }
+
+    return null
 }
 
 const selectBestMatch = (name, allAnimes) => {
