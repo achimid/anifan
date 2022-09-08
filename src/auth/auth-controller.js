@@ -8,7 +8,7 @@ const onAuthenticateSuccess = (req, res) => {
     (err, token) => {
         if (err) return res.redirect("/")
 
-        res.cookie('X-Anifan-Token-JWT', token)
+        res.cookie('X-Anifan-Token-JWT', token, { expires: new Date(Date.now() + 60000 * 10080) })
         return res.redirect("/")
     })
 }
