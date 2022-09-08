@@ -96,7 +96,7 @@ function createItemDetail(id, detail, sources) {
                                         <h5 class="mt-0 font-weight-bold">${detail.name}</h5>                                
                                         <h6><a href="${detail.url}" class="badge badge-secondary">My Anime List</a></h6>                                        
                                     </div>
-                                    <div class="col-md-3 text-left">                                     
+                                    <div class="col-md-3 text-left ${!isAuth ? 'd-none' : ''}">                                     
                                         <div class="float-right">
                                             <button type="button" onClick="subscribePost(this, '${detail._id}')" class="badge badge-secondary" title="Ser notificado quando um novo episódio desse anime for lançado">
                                                 <i data-feather="bell"></i> Quero ser notificado
