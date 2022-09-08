@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const schema = mongoose.Schema({    
+    gAuth: { 
+        type: Object,
+        required: false
+    },
     webSubscription: { 
         type: Object,
         required: false

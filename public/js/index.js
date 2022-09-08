@@ -131,6 +131,9 @@ function createDetailSource(sources) {
 }
 
 function createListItemMirrors(mirrors) {
+    const isAuth = getCookie('X-Anifan-Token-JWT')
+    if (!isAuth) return ''
+
     return mirrors.map(item => {
         return `
             <a href="${item.url}" class="badge badge-info">${item.description}</a>
