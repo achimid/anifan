@@ -1,7 +1,10 @@
 const $list = document.querySelector("#accordion")
+const $navLogin = document.querySelector("#nav-login")
+
+const isAuth = getCookie('X-Anifan-Token-JWT')
 
 load()
-   
+isAuth ? $navLogin.classList.add("d-none") : $navLogin.classList.remove("d-none")
 
 async function load() {
     return fetchGet("/api/v1/home")
@@ -130,8 +133,7 @@ function createDetailSource(sources) {
     }).join("")
 }
 
-function createListItemMirrors(mirrors) {
-    const isAuth = getCookie('X-Anifan-Token-JWT')
+function createListItemMirrors(mirrors) {    
     if (!isAuth) return ''
 
     return mirrors.map(item => {
@@ -218,4 +220,5 @@ function eventDone() {
     feather.replace()
     document.querySelector('.collapsed').click()
 }
+
 
