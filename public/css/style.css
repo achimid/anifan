@@ -54,3 +54,8 @@ img.card-img {
     -webkit-line-clamp: 7;
     -webkit-box-orient: vertical;
 }
+
+video {
+    
+    width: 100%;
+}

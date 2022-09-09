@@ -99,6 +99,33 @@
         </div>
       </div>
     </footer>
+
+    <div id="modal-video" class="modal fade" role="dialog" >
+      <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+              <div class="modal-body">
+                  <div class="video"></div>
+                  <div class="progress"></div>
+                  <div class="info">
+                    <div class="row"> 
+                      <div class="col-md-9"> 
+                        <div>
+                          [Peers:  <code id="sPeers">  0 </code>] - 
+                          [Download Speed: <code id="sDownloaSpeed"> 0 Kb/s </code>] - 
+                          [Upload Speed:  <code id="sUploadSpeed">  0 Kb/s </code>]
+                          <p id="sName"></p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 text-right">                         
+                          <a id="sMagnet" href="#">[Magnet]</a>
+                          <a id="sDownloadLink" href="#">[Download]</a>                        
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    
     
     
 
@@ -106,9 +133,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/webtorrent@0.98.18/webtorrent.min.js"></script>
 
         
+    <script src="./js/webpt.js"></script>
     <script src="./js/client.js"></script>
     <script src="./js/index.js"></script>
+    
   </body>
 </html>

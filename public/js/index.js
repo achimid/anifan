@@ -136,11 +136,15 @@ function createDetailSource(sources) {
 function createListItemMirrors(mirrors) {    
     if (!isAuth) return ''
 
-    return mirrors.map(item => {
+    const list = mirrors.map(item => {
         return `
             <a href="${item.url}" class="badge badge-info">${item.description}</a>
         `
-    }).join("")
+    })
+
+    list.push(`<a href="#" onClick="addTorrent(torrentIdDefault)" class="badge badge-info">Torrent</a>`)
+
+    return list.join('')
 }
 
 function createDetailExtra(extra) {
@@ -222,3 +226,10 @@ function eventDone() {
 }
 
 
+
+$(document).ready(function() {
+    $("#modal-video").on('hide.bs.modal', function() {
+        try { document.querySelector('video').remove() } catch (error) {}
+        try { client.remove(torrentIdDefault) } catch (error) {}
+    });
+});
