@@ -4,58 +4,82 @@ const $sDownload = document.querySelector('#sDownloaSpeed')
 const $sUpload = document.querySelector('#sUploadSpeed')
 const $sMagnet = document.querySelector('#sMagnet')
 const $sDownloadLink = document.querySelector('#sDownloadLink')
-const $sName = document.querySelector('#sName')
+const $modalVideo = $("#modal-video")
+const getVideo = () => document.querySelector('video')
 
 
 const client = new WebTorrent()
 
+let intervalCurrent = null
+let torrentIdCurrent = null
+const torrentIdDefault = 'magnet:?xt=urn:btih:f038bb27c391be7a060c19bb479ea9848997f32b&dn=%5BAniFan%5D_%5BAnimesATC%5D_Overlord_IV_-_07_(1080p).mp4&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.fastcast.nz&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2F9.rarbg.com%3A2810%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A6969%2Fannounce&tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=https%3A%2F%2Fopentracker.i2p.rocks%3A443%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.moeking.me%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.dler.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.demonii.com%3A1337%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Fchouchou.top%3A8080%2Fannounce&tr=https%3A%2F%2Ftracker.nanoha.org%3A443%2Fannounce&tr=https%3A%2F%2Ftracker.lilithraws.org%3A443%2Fannounce&tr=http%3A%2F%2Fvps02.net.orel.ru%3A80%2Fannounce&tr=http%3A%2F%2Ftracker3.ctix.cn%3A8080%2Fannounce&tr=http%3A%2F%2Ftracker.mywaifu.best%3A6969%2Fannounce&tr=udp%3A%2F%2Fzecircle.xyz%3A6969%2Fannounce&tr=udp%3A%2F%2Fyahor.ftp.sh%3A6969%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337'
+
+
+
+$modalVideo.on('hide.bs.modal', function() {
+    try { clearInterval(intervalCurrent) } catch (error) {}
+    try { getVideo().remove() } catch (error) {}
+    try { client.remove(torrentIdCurrent) } catch (error) {}
+
+    torrentIdCurrent = null
+    intervalCurrent = null
+});
+
+
 client.on('error', function (err) {
     console.error('ERROR: ' + err.message)
 })
-const torrentIdDefault = 'magnet:?xt=urn:btih:08ada5a7a6183aae1e09d831df6748d566095a10&dn=Sintel&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.fastcast.nz&ws=https%3A%2F%2Fwebtorrent.io%2Ftorrents%2F'
 
-function addTorrent(torrentId) {
-    log('Adding ' + torrentId)
-    client.add(torrentId, onTorrent)    
+
+function addTorrent(torrentId = torrentIdDefault) {
+    torrentIdCurrent = torrentId
     
-    $("#modal-video").modal()
+    console.log('Adding ' + torrentIdCurrent)
+
+    $sMagnet.href = torrentIdCurrent
+    client.add(torrentIdCurrent, onTorrent)        
+    $modalVideo.modal()
+
+    $('#sDownloadLink').hide()
+    $('.info-torrent').show()
 }
 
 function onTorrent(torrent) {
-    log('Got torrent metadata!')
-    log(
+    console.log('Got torrent metadata!')
+    console.log(
         'Torrent info hash: ' + torrent.infoHash + ' ' +
         '<a href="' + torrent.magnetURI + '" target="_blank">[Magnet URI]</a> ' +
         '<a href="' + torrent.torrentFileBlobURL + '" target="_blank" download="' + torrent.name + '.torrent">[Download .torrent]</a>'
     )
-
-    $sMagnet.href = torrent.magnetURI
     
-    const interval = setInterval(function () {
-        progress((torrent.progress * 100).toFixed(1), torrent.downloadSpeed, torrent.uploadSpeed, torrent.numPeers)
-    }, 2000)
+    
+    intervalCurrent = setInterval(() => progress(torrent), 2000)
 
     torrent.on('done', function () {
-        $sDownloadLink.href = torrent.torrentFileBlobURL        
+        $sDownloadLink.href = torrent.torrentFileBlobURL           
+        $sDownloadLink.download = torrent.files[0].name
+        
+        torrent.files[0].getBlobURL((err, url) => { $sDownloadLink.href = url })
+        $('#sDownloadLink').show()
+        $('.info-torrent').hide()
     })
 
     torrent.files.filter(({ name })  => name.endsWith('.mp4')).forEach(function (file) {
         file.appendTo('.video')
-        $sName.innerHTML = file.name
         file.getBlobURL(function (err, url) {
             if (err) return log(err.message)
-            log('File done.')
-            log('<a href="' + url + '">Download full file: ' + file.name + '</a>')            
+            console.log('File done.')
+            console.log('<a href="' + url + '">Download full file: ' + file.name + '</a>')            
         })
     })
 }
 
+function progress(torrent) {    
+    const progress = (torrent.progress * 100).toFixed(1)
+    const download = torrent.downloadSpeed
+    const upload = torrent.uploadSpeed
+    const peers = torrent.numPeers
 
-function log (str) {    
-    // document.querySelector('.log').innerHTML = str
-}
-
-function progress(progress, download, upload, peers) {
     $progress.innerHTML = `<div class="progress-bar" role="progressbar" style="width: ${progress}%;" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">${progress}%</div>`
     $sPeers.innerHTML = peers
     $sDownload.innerHTML = prettyBytes(download) + '/s'

@@ -225,11 +225,3 @@ function eventDone() {
     document.querySelector('.collapsed').click()
 }
 
-
-
-$(document).ready(function() {
-    $("#modal-video").on('hide.bs.modal', function() {
-        try { document.querySelector('video').remove() } catch (error) {}
-        try { client.remove(torrentIdDefault) } catch (error) {}
-    });
-});
