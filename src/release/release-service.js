@@ -34,7 +34,7 @@ const updateFromIntegration = async (release, i) => {
         url: i.url
     })
 
-    if (release.mirrors && i.data.mirrors) {
+    if (release.mirrors && i.data && i.data.mirrors) {
         if (release.mirrors.length <= 1 && i.data.mirrors.length > 0) {
             for (let j = 0; j < i.data.mirrors.length; j++) {
                 const mirror = i.data.mirrors[j];
