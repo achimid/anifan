@@ -13,13 +13,14 @@ const readScript = (file) => {
 
 const getSubscribers = () => {
     return [
-        { useProxy: true, skipImage: false, url: "https://www.animestc.net", script: readScript("animestelecine-script.js")},
-        { useProxy: true, skipImage: true, url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js")},
-        { useProxy: true, skipImage: true, url: "https://goanimes.net/", script: readScript("goanimes-script .js")},
-        { useProxy: false, skipImage: true, url: "https://darkmahou.net/", script: readScript("darkanimes-script.js")},
-        { useProxy: false, skipImage: true, url: "https://www.crunchyroll.com/pt-br/videos/anime/updated", script: readScript("crunchyroll-script.js")},
-        { useProxy: false, skipImage: true, url: "https://www.anbient.com/", script: readScript("anbient-script.js")},
-        { useProxy: false, skipImage: true, url: "https://animeshouse.net/", script: readScript("animeshouse-script.js")},
+        // { useProxy: true, skipImage: false, url: "https://www.animestc.net", script: readScript("animestelecine-script.js")},
+        // { useProxy: true, skipImage: true, url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js")},
+        // { useProxy: true, skipImage: true, url: "https://goanimes.net/", script: readScript("goanimes-script .js")},
+        // { useProxy: false, skipImage: true, url: "https://darkmahou.net/", script: readScript("darkanimes-script.js")},
+        // { useProxy: false, skipImage: true, url: "https://www.crunchyroll.com/pt-br/videos/anime/updated", script: readScript("crunchyroll-script.js")},
+        // { useProxy: false, skipImage: true, url: "https://www.anbient.com/", script: readScript("anbient-script.js")},
+        // { useProxy: false, skipImage: true, url: "https://animeshouse.net/", script: readScript("animeshouse-script.js")},
+        { useProxy: false, skipImage: false, url: "https://subsplease.org/", script: readScript("subsplease-script.js")},
         // { useProxy: false, skipImage: true, url: "https://sakuraanimes.com/home?categoria=1", script: readScript("animeshouse-script.js")},
     ]
 } 

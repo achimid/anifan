@@ -34,12 +34,14 @@ const updateFromIntegration = async (release, i) => {
         url: i.url
     })
 
-    if (!!release.mirrors && release.mirrors.length <= 1 && !!i.data.mirrors && i.data.mirrors.length > 0) {
-        for (let j = 0; j < i.data.mirrors.length; j++) {
-            const mirror = i.data.mirrors[j];
-            
-            if (release.mirrors.filter(m => m.description == mirror.description).length == 0) {
-                release.mirrors.push(mirror)    
+    if (release.mirrors && i.data.mirrors) {
+        if (release.mirrors.length <= 1 && i.data.mirrors.length > 0) {
+            for (let j = 0; j < i.data.mirrors.length; j++) {
+                const mirror = i.data.mirrors[j];
+                
+                if (release.mirrors.filter(m => m.description == mirror.description).length == 0) {
+                    release.mirrors.push(mirror)    
+                }
             }
         }
     }
