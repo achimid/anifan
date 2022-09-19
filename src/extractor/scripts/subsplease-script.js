@@ -1,4 +1,12 @@
+function sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
 async function extract() {
+
+    await sleep(3000)
     
     const episodes = [...document.querySelectorAll('.home-post .release-item')].reverse()
     for (let i = 0; i < episodes.length; i++) {
