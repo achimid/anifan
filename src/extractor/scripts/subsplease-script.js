@@ -42,7 +42,7 @@ async function extract() {
             redirect: 'follow'
         };
 
-        await fetch("http://localhost:8080/api/v1/integration", requestOptions)
+        await fetch("https://anifan.com.br/api/v1/integration", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
