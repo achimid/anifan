@@ -142,8 +142,6 @@ function createListItemMirrors(mirrors) {
         `
     })
 
-    list.push(`<a href="#" onClick="addTorrent(torrentIdDefault)" class="badge badge-info">Torrent</a>`)
-
     return list.join('')
 }
 

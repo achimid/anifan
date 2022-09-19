@@ -8,13 +8,24 @@ async function extract() {
         const anime = $episode.querySelector('a').innerText.split('—')[0].trim()
         const episode = parseInt($episode.querySelector('a').innerText.split('—')[1])
         const title = `${anime} - Episódio ${episode}`
+
+        const mirrorTorrent = [...$episode.querySelectorAll('.badge-wrapper a')].filter(e => e.innerText == '1080p')[0].href
+
         
         const post = {
             from: "Subs Please (ENG)",
             url,
             title,
             anime,
-            episode
+            episode,
+            data: {
+                mirrors: [
+                    {
+                        description: "Torrent (ENG)",
+                        url: mirrorTorrent
+                    }
+                ]
+            }
         }
         
         console.log(post)
@@ -31,7 +42,7 @@ async function extract() {
             redirect: 'follow'
         };
 
-        await fetch("https://anifan.com.br/api/v1/integration", requestOptions)
+        await fetch("http://localhost:8080/api/v1/integration", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));

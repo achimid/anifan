@@ -43,6 +43,7 @@ const enrichAnimeFromSource = async (anime, nameQuery, malS) => {
             anime.description = !anime.synopsis ? atc.synopsis : anime.description
             anime.name =        !anime.title ? atc.title : anime.title
             anime.names =       !anime.names ? [...new Set([...anime.names, atc.title, atc.slug])].filter(s => s) : [atc.title, atc.slug].filter(s => s)
+            anime.image =       'https://stc.animestc.com/' + atc.cover.thumbnailName
             anime.extra = [
                 { key: "Episódios",     value: atc.episodeCount },
                 { key: "Ano"      ,     value: atc.year },
