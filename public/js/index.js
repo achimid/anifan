@@ -7,14 +7,23 @@ load()
 isAuth ? $navLogin.classList.add("d-none") : $navLogin.classList.remove("d-none")
 
 async function load() {
-    return fetchGet("/api/v1/home")
+    return changeStyle("grid")
+}
+
+function changeStyle(type) {
+    fetchGet("/api/v1/home")
         .then(res => res.json())
         .then(prepareData)
         .then(json => {
-            $list.innerHTML = ""
-            json.map(item => { $list.innerHTML = $list.innerHTML + createListItem(item)})    
+            if (type == 'grid') {
+                gridStyle(json)
+            } else {
+                $list.innerHTML = ""
+                json.map(item => { $list.innerHTML = $list.innerHTML + createListItem(item)})    
+                eventDone()        
+            }
         })  
-        .then(eventDone)  
+    
 }
 
 function prepareData(json) {
@@ -223,3 +232,40 @@ function eventDone() {
     document.querySelector('.collapsed').click()
 }
 
+
+function gridStyle(json) {
+    const cards = json.map(createCard).join("")
+    $list.innerHTML = `
+        <div class="d-flex justify-content-center">
+            <div class="row grid-style">
+                ${cards}
+            </div>                   
+        </div>
+    `
+    addNewBadge()
+}
+
+function addNewBadge() {
+    [...document.querySelectorAll('.product')].map(e => {
+    [...e.querySelectorAll('.list-group > .btn-info')].slice(-1)[0].innerHTML += '<span class="badge badge-secondary">New</span>'
+    })          
+}
+
+function createCard(item) {
+    return `
+    <div class="product">
+        <div class="imgbox"> <img src="${item.anime.image}"> </div>
+        <div class="specifies">
+            <h5>${item.anime.name}<span>Epi. ${item.episode}</span></h5>
+
+            <div class="list-group">
+            ${
+                item.sources.map(source => {
+                return `<a href="${source.url}" class="btn btn-info btn-sm btn-block mt-2">${source.title}</a>`
+                }).join("")
+            }                    
+            </div>
+        </div>
+        </div>
+    `
+}
