@@ -80,7 +80,7 @@ async function fetchGet(uri) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json', 
-            'X-Anifan-User-UUID': getId()
+            // 'X-Anifan-User-UUID': getId()
         }
     })
 }

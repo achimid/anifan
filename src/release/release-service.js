@@ -1,6 +1,7 @@
 const Release = require('./release-model')
 const pushService = require('../push/push-service')
 const animeService = require('../anime/anime-service')
+const statusService = require('../status/status-service')
 const releaseRepository = require('./release-repository')
 const animeModel = require('../anime/anime-model')
 
@@ -34,6 +35,8 @@ const updateFromIntegration = async (release, i) => {
         url: i.url
     })
 
+    statusService.updateLastRelease(i.from)
+
     if (release.mirrors && i.data && i.data.mirrors) {
         if (release.mirrors.length <= 1 && i.data.mirrors.length > 0) {
             for (let j = 0; j < i.data.mirrors.length; j++) {
@@ -56,6 +59,8 @@ const createFromIntegration = async (i) => {
     
     const anime = await animeService.findByAnimeName(i.anime)
     anime.source = undefined
+
+    statusService.updateLastRelease(i.from)
 
     return releaseRepository.save(new Release({
 

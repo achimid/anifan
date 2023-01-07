@@ -1,5 +1,6 @@
 const $list = document.querySelector("#accordion")
 const $navLogin = document.querySelector("#nav-login")
+const $statusList = document.querySelector("#statusList")
 
 const isAuth = getCookie('X-Anifan-Token-JWT')
 
@@ -256,7 +257,12 @@ function createCard(item) {
     <div class="product">
         <div class="imgbox"> <img src="${item.anime.image}"> </div>
         <div class="specifies">
-            <h5>${item.anime.name}<span>Epi. ${item.episode}</span></h5>
+            <h5>
+                <a href="${item.anime.url}">
+                    ${item.anime.name}
+                </a>
+                <span>Epi. ${item.episode}</span>
+            </h5>
 
             <div class="list-group">
             ${
@@ -266,6 +272,28 @@ function createCard(item) {
             }                    
             </div>
         </div>
-        </div>
+    </div>
     `
 }
+
+async function updateStatus() {
+    fetchGet("/api/v1/home/status")
+        .then(res => res.json())
+        .then(json => {
+            const status = Object.entries(json).map(i => i[1])
+            const statusHtml = status.map(s => {
+                return `
+                <li>
+                    <a href="${s.url}" class="btn btn-dark">
+                    [${s.lastRelease}] - [${s.lastExecution}] - <span class="badge ${s.status || !!s.lastRelease ? "badge-success" : "badge-danger"}">${s.status || !!s.lastRelease ? "Sucesso" : "Falha"}</span> - ${s.name}
+                    </a>
+                </li>
+                `
+            }).join("")
+
+            $statusList.innerHTML = statusHtml
+        })
+}
+
+updateStatus()
+setInterval(updateStatus, 60000)
