@@ -1,21 +1,20 @@
 async function extract() {
 
-    const episodes = [...document.querySelectorAll('.releases li') ].reverse()
+    const episodes = [...document.querySelectorAll('.animation-2 article')].reverse()
     for (let i = 0; i < episodes.length; i++) {
         const $episode = episodes[i]
 
-        const url = $episode.querySelector('.season-name a').href
-        const prepareAnime = $episode.querySelector('.season-name').innerText.replace('(PORTUGUESE DUB)', '').replace('(JAPANESE AUDIO)', '')
-        const anime = prepareAnime[0].toUpperCase() + prepareAnime.substring(1).toLowerCase();
-        const episode = parseInt($episode.querySelector('.availability').innerText.match(/\d+/g))
+        const url = $episode.querySelector('.data a').href
+        const anime = $episode.querySelector('.data h3').innerText
+        const episode = parseInt($episode.querySelector('.data span').innerText.match(/\d+/g))
         const title = `${anime} - Episódio ${episode}`
         
         const post = {
-            from: "Crunchyroll",
+            from: "Animes Up",
             url,
             title,
             anime,
-            episode
+            episode,
         }
         
         console.log(post)
