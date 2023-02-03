@@ -14,15 +14,15 @@ const readScript = (file) => {
 
 const getSubscribers = () => {
     return [
-        // { useProxy: false, skipImage: false, url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), name: "Animes Telecine"},
-        // { useProxy: false, skipImage: true, url: "https://goanimes.net/", script: readScript("goanimes-script .js"), name: "Go Animes"},
-        // { useProxy: false, skipImage: false, url: "https://subsplease.org/", script: readScript("subsplease-script.js"), name: "Subs Please (ENG)"},
+        { useProxy: false, skipImage: false, url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), name: "Animes Telecine"},
+        { useProxy: false, skipImage: true, url: "https://goanimes.net/", script: readScript("goanimes-script .js"), name: "Go Animes"},
+        { useProxy: false, skipImage: false, url: "https://subsplease.org/", script: readScript("subsplease-script.js"), name: "Subs Please (ENG)"},
         { useProxy: false, skipImage: true, url: "https://animesup.biz/episodios/", script: readScript("animesup-script.js"), name: "Animes Up"},
-        // { useProxy: false, skipImage: true, url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js"), name: "Animes Online CC"},
-        // { useProxy: false, skipImage: true, url: "https://darkmahou.net/", script: readScript("darkanimes-script.js"), name: "Dark Animes"},
-        // { useProxy: false, skipImage: true, url: "https://www.crunchyroll.com/pt-br/simulcastcalendar?filter=premium", script: readScript("crunchyroll-script.js"), name: "Crunchyroll"},
+        { useProxy: false, skipImage: true, url: "https://animesonline.cc/episodio/", script: readScript("animesonlinecc-script.js"), name: "Animes Online CC"},
+        { useProxy: false, skipImage: true, url: "https://darkmahou.net/", script: readScript("darkanimes-script.js"), name: "Dark Animes"},
+        { useProxy: false, skipImage: true, url: "https://www.crunchyroll.com/pt-br/simulcastcalendar?filter=premium", script: readScript("crunchyroll-script.js"), name: "Crunchyroll"},
         // { useProxy: false, skipImage: true, url: "https://www.anbient.com/", script: readScript("anbient-script.js"), name: "Anbient"},
-        // { useProxy: false, skipImage: true, url: "https://animeshouse.net/", script: readScript("animeshouse-script.js"), name: "Animes House"},
+        { useProxy: false, skipImage: true, url: "https://animeshouse.net/", script: readScript("animeshouse-script.js"), name: "Animes House"},
         // { useProxy: false, skipImage: true, url: "https://sakuraanimes.com/home?categoria=1", script: readScript("animeshouse-script.js")}, Sakura Animes
     ]
 } 
