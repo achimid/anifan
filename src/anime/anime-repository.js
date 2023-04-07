@@ -1,7 +1,7 @@
 const Anime = require('./anime-model')
 const stringUtils = require('../utils/string-utils')
 
-const animeNotFound = []
+const animeNotFound = new Set()
 
 const save = async (anime) => {
     return anime.save()
@@ -30,14 +30,14 @@ const findByName = async (name) => {
         similar.names.push(name)
         await save(similar)
     } else {
-        animeNotFound.push(name)
+        animeNotFound.add(name)
     }
 
     return similar
 }
 
 const findIdByNameSimilarity = async (name) => {
-    if (animeNotFound.includes(name)) {
+    if (animeNotFound.has(name)) {
         console.log('*-*-*-*-*-*- Anime já identificado como not found')
         return null
     }
@@ -62,7 +62,7 @@ const selectBestMatch = (name, allAnimes) => {
 }
 
 const listAnimeNotFound = async () => {
-    return animeNotFound
+    return [...animeNotFound]
 }
 
 module.exports = {

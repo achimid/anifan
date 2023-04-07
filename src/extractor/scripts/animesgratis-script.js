@@ -4,13 +4,13 @@ async function extract() {
     for (let i = 0; i < episodes.length; i++) {
         const $episode = episodes[i]
 
-        const url = $episode.querySelector('.data a').href
+        const url = $episode.querySelector('a').href
         const anime = $episode.querySelector('.data .serie').innerText
         const episode = parseInt($episode.querySelector('.data h3').innerText.match(/\d+/g))
         const title = `${anime} - Episódio ${episode}`
         
         const post = {
-            from: "Animes Up",
+            from: "Animes Gratis",
             url,
             title,
             anime,

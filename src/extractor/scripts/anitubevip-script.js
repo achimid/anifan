@@ -1,16 +1,16 @@
 async function extract() {
 
-    const episodes = [...document.querySelectorAll('.animation-2 article')].reverse()
+    const episodes = [...document.querySelectorAll('.left .epi_loop_item')].reverse()
     for (let i = 0; i < episodes.length; i++) {
         const $episode = episodes[i]
 
-        const url = $episode.querySelector('.data a').href
-        const anime = $episode.querySelector('.data .serie').innerText
-        const episode = parseInt($episode.querySelector('.data h3').innerText.match(/\d+/g))
+        const url = $episode.querySelector('a').href
+        const anime = $episode.querySelector('.epi_loop_nome').innerText.replace(' - Dublado', '').split(' ep ')[0]
+        const episode = parseInt($episode.querySelector('.epi_loop_nome_sub').innerText.match(/\d+/g))
         const title = `${anime} - Episódio ${episode}`
         
         const post = {
-            from: "Animes Up",
+            from: "Anitube VIP",
             url,
             title,
             anime,
