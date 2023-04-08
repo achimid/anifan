@@ -16,7 +16,7 @@ const selectBestMatch = async (name, details, fMapName) => {
             const similarity = stringSimilarity.compareTwoStrings(nameCompateble, nameDetail);
 
             similaritys.push({similarity, detail})
-            if (similarity > 0.6) {
+            if (similarity > 0.85) {
                 // console.log(`Similaridade bateu (${similarity}): ${name} != ${nameDetail}`)
                 // return detail
             } else {
@@ -33,7 +33,7 @@ const selectBestMatch = async (name, details, fMapName) => {
 
     const { similarity, detail} = similaritys[0]
 
-    if (similarity > 0.6) {
+    if (similarity > 0.85) {
         // console.log(`Similaridade bateu (${similarity}): ${name} != ${detail.title || detail.name }`)
         return detail
     }
