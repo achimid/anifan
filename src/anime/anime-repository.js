@@ -26,7 +26,7 @@ const findByName = async (name) => {
 
     const similar = await findIdByNameSimilarity(name)
 
-    if (similar && !similar.names.includes(name)) {
+    if (similar && similar.names && !similar.names.includes(name)) {
         similar.names.push(name)
         await save(similar)
     } else {
@@ -43,7 +43,7 @@ const findIdByNameSimilarity = async (name) => {
     }
 
     const allAnimes = await Anime.find({}, '_id name names').lean() // TODO: Melhorar e corrigir isso, vai quebrar o sistema no futuro.
-
+    
     const selectedId = await selectBestMatch(name, allAnimes)
     if (selectedId) {
         return Anime.findById(selectedId)
@@ -56,7 +56,7 @@ const selectBestMatch = (name, allAnimes) => {
 
     if (!allAnimes) return null
 
-    const fMapName = (d) => [d.name, ...d.names]
+    const fMapName = (d) => [d.name, ...(d.names || [])]
 
     return stringUtils.selectBestMatch(name, allAnimes, fMapName)
 }

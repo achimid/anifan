@@ -15,8 +15,8 @@ const readScript = (file) => {
 const getSubscribers = () => {
     return [
         { useProxy: false, skipImage: false, url: "https://subsplease.org/", script: readScript("subsplease-script.js"), name: "Subs Please (ENG)"},
-        { useProxy: false, skipImage: false, url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), name: "Animes Telecine"},
         { useProxy: false, skipImage: false, url: "https://goanimes.net/", script: readScript("goanimes-script .js"), name: "Go Animes"},
+        { useProxy: false, skipImage: false, url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), name: "Animes Telecine"},
         { useProxy: false, skipImage: true, url: "https://animesup.top/episodio", script: readScript("animesup-script.js"), name: "Animes Up"},
         { useProxy: false, skipImage: true, url: "https://saikoanimes.net/episodios-legendados-em-exibicao/", script: readScript("saikoanimes-script.js"), name: "Saiko Animes"},
         { useProxy: false, skipImage: true, url: "https://animesonlinecc.to/episodio/", script: readScript("animesonlinecc-script.js"), name: "Animes Online CC"},
@@ -25,8 +25,17 @@ const getSubscribers = () => {
         { useProxy: false, skipImage: true, url: "https://rine.cloud/", script: readScript("rinecloud-script.js"), name: "Rine Cloud"},
         { useProxy: false, skipImage: true, url: "https://www.anitube.vip/", script: readScript("anitubevip-script.js"), name: "Anitube VIP"},
         { useProxy: false, skipImage: true, url: "https://animefire.net/", script: readScript("animefire-script.js"), name: "Anime Fire"},
+        { useProxy: false, skipImage: false, url: "https://subsplease.org/", script: readScript("subsplease-script.js"), name: "Subs Please (ENG)"},
         { useProxy: false, skipImage: false, url: "https://animeszone.net/epex00/", script: readScript("animeszone-script.js"), name: "Animes Zone"},
         { useProxy: false, skipImage: true, url: "https://animesgratis.org/episodio/", script: readScript("animesgratis-script.js"), name: "Animes Gratis"},
+        { useProxy: false, skipImage: true, url: "https://centralanimestk.net/episodio/", script: readScript("centralanimes-script.js"), name: "Central Animes TK"},
+        { useProxy: false, skipImage: true, url: "https://subanimes.org/lancamentos/", script: readScript("subanimes-script.js"), name: "Sub Animes"},
+        { useProxy: false, skipImage: true, url: "https://ninjinanime.com/", script: readScript("ninjinanimes-script.js"), name: "Ninjin Anime (ESP)"},
+        { useProxy: false, skipImage: true, url: "https://www.anroll.net/lancamentos", script: readScript("animesroll-script.js"), name: "AnimesRoll"},
+        { useProxy: false, skipImage: true, url: "https://animesflix.net/", script: readScript("animesflix-script.js"), name: "Animes Flix"},
+        { useProxy: false, skipImage: true, url: "https://animetvonline.cx/", script: readScript("animetv-script.js"), name: "Anime TV"},
+        { useProxy: false, skipImage: true, url: "https://animesgames.net/lancamentos", script: readScript("animesgames-script.js"), name: "Animes Games"},
+        
         // { useProxy: false, skipImage: true, url: "https://sakuraanimes.com/home?categoria=1", script: readScript("animeshouse-script.js"), name: "Sakura Animes"}, 
         // { useProxy: false, skipImage: false, url: "https://www.crunchyroll.com/", script: readScript("crunchyroll-script.js"), name: "Crunchyroll"},
         // { useProxy: false, skipImage: true, url: "https://www.anbient.com/", script: readScript("anbient-script.js"), name: "Anbient"},

@@ -53,14 +53,16 @@ const enrichAnimeFromSource = async (anime, nameQuery, malS) => {
         }
     }
 
+    if (!anime.name) anime.name = nameQuery
+    
     return anime
 }
 
 
 const createByName = async (name, mal = undefined) => {
-    
+        
     const anime = new Anime()
-
+    
     return enrichAnimeFromSource(anime, name, mal).then(save)
 }
 
