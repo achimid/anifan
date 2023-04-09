@@ -25,7 +25,6 @@ const getSubscribers = () => {
         { useProxy: false, skipImage: true, url: "https://rine.cloud/", script: readScript("rinecloud-script.js"), name: "Rine Cloud"},
         { useProxy: false, skipImage: true, url: "https://www.anitube.vip/", script: readScript("anitubevip-script.js"), name: "Anitube VIP"},
         { useProxy: false, skipImage: true, url: "https://animefire.net/", script: readScript("animefire-script.js"), name: "Anime Fire"},
-        { useProxy: false, skipImage: false, url: "https://subsplease.org/", script: readScript("subsplease-script.js"), name: "Subs Please (ENG)"},
         { useProxy: false, skipImage: false, url: "https://animeszone.net/epex00/", script: readScript("animeszone-script.js"), name: "Animes Zone"},
         { useProxy: false, skipImage: true, url: "https://animesgratis.org/episodio/", script: readScript("animesgratis-script.js"), name: "Animes Gratis"},
         { useProxy: false, skipImage: false, url: "https://centralanimestk.net/", script: readScript("centralanimes-script.js"), name: "Central Animes TK"},
