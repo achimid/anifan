@@ -28,7 +28,7 @@ const getSubscribers = () => {
         { useProxy: false, skipImage: false, url: "https://subsplease.org/", script: readScript("subsplease-script.js"), name: "Subs Please (ENG)"},
         { useProxy: false, skipImage: false, url: "https://animeszone.net/epex00/", script: readScript("animeszone-script.js"), name: "Animes Zone"},
         { useProxy: false, skipImage: true, url: "https://animesgratis.org/episodio/", script: readScript("animesgratis-script.js"), name: "Animes Gratis"},
-        { useProxy: false, skipImage: true, url: "https://centralanimestk.net/episodio/", script: readScript("centralanimes-script.js"), name: "Central Animes TK"},
+        { useProxy: false, skipImage: false, url: "https://centralanimestk.net/", script: readScript("centralanimes-script.js"), name: "Central Animes TK"},
         { useProxy: false, skipImage: true, url: "https://subanimes.org/lancamentos/", script: readScript("subanimes-script.js"), name: "Sub Animes"},
         { useProxy: false, skipImage: true, url: "https://ninjinanime.com/", script: readScript("ninjinanimes-script.js"), name: "Ninjin Anime (ESP)"},
         { useProxy: false, skipImage: true, url: "https://www.anroll.net/lancamentos", script: readScript("animesroll-script.js"), name: "AnimesRoll"},
