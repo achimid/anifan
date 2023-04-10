@@ -731,10 +731,10 @@
   "https://subsplease.org/": [
     {
       "name": "_ga_2BKJM8CCL4",
-      "value": "GS1.1.1681070580.4.1.1681070921.0.0.0",
+      "value": "GS1.1.1681090518.5.1.1681090571.0.0.0",
       "domain": ".subsplease.org",
       "path": "/",
-      "expires": 1715630921.834927,
+      "expires": 1715650571.079838,
       "size": 51,
       "httpOnly": false,
       "secure": false,
@@ -748,7 +748,7 @@
       "value": "GA1.1.207546096.1680900562",
       "domain": ".subsplease.org",
       "path": "/",
-      "expires": 1715630921.835338,
+      "expires": 1715650571.080321,
       "size": 29,
       "httpOnly": false,
       "secure": false,
@@ -3147,6 +3147,22 @@
       "expires": 1715628444.717968,
       "size": 30,
       "httpOnly": false,
+      "secure": false,
+      "session": false,
+      "sameParty": false,
+      "sourceScheme": "Secure",
+      "sourcePort": 443
+    }
+  ],
+  "https://nyaa.si/?f=0&c=0_0&q=%5BErai-raws%5D+%5B1080p%5D+%5BPOR-BR%5D": [
+    {
+      "name": "__ddg1_",
+      "value": "zWEt30deyN8wAo4HSOZD",
+      "domain": ".nyaa.si",
+      "path": "/",
+      "expires": 1712625871.490498,
+      "size": 27,
+      "httpOnly": true,
       "secure": false,
       "session": false,
       "sameParty": false,

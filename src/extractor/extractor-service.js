@@ -14,6 +14,7 @@ const readScript = (file) => {
 
 const getSubscribers = () => {
     return [
+        { useProxy: false, skipImage: true, url: "https://nyaa.si/?f=0&c=0_0&q=%5BErai-raws%5D+%5B1080p%5D+%5BPOR-BR%5D", script: readScript("erairaws-script.js"), name: "Erai-raws (Nyaa)"},
         { useProxy: false, skipImage: false, url: "https://subsplease.org/", script: readScript("subsplease-script.js"), name: "Subs Please (ENG)"},
         { useProxy: false, skipImage: false, url: "https://goanimes.net/", script: readScript("goanimes-script .js"), name: "Go Animes"},
         { useProxy: false, skipImage: false, url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), name: "Animes Telecine"},
