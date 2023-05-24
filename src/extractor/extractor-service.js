@@ -18,7 +18,7 @@ const getSubscribers = () => {
         { useProxy: false, skipImage: false, url: "https://subsplease.org/", script: readScript("subsplease-script.js"), name: "Subs Please (ENG)"},
         { useProxy: false, skipImage: false, url: "https://goanimes.net/", script: readScript("goanimes-script .js"), name: "Go Animes"},
         { useProxy: false, skipImage: false, url: "https://www.animestc.net", script: readScript("animestelecine-script.js"), name: "Animes Telecine"},
-        { useProxy: false, skipImage: true, url: "https://animesup.top/episodio", script: readScript("animesup-script.js"), name: "Animes Up"},
+        { useProxy: false, skipImage: true, url: "https://animesup.art/episodio", script: readScript("animesup-script.js"), name: "Animes Up"},
         { useProxy: false, skipImage: true, url: "https://saikoanimes.net/episodios-legendados-em-exibicao/", script: readScript("saikoanimes-script.js"), name: "Saiko Animes"},
         { useProxy: false, skipImage: true, url: "https://animesonlinecc.to/episodio/", script: readScript("animesonlinecc-script.js"), name: "Animes Online CC"},
         { useProxy: false, skipImage: true, url: "https://darkmahou.net/", script: readScript("darkanimes-script.js"), name: "Dark Animes"},
